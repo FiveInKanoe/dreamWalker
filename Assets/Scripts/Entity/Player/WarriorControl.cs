@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class WarriorControl : IClassControl
 {
-    public void ControlStrategy()
+    public void ControlStrategy(Player player)
     {
-        throw new System.NotImplementedException();
+        //À Ã
+        if (Input.GetMouseButton(0) == true)
+        {
+            player.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        else
+        {
+            player.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 }

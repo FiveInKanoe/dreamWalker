@@ -4,5 +4,5 @@ using UnityEngine;
 
 interface IClassControl
 {
-    void ControlStrategy();
+    void ControlStrategy(Player player);
 }

@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class MovementControl
 {
-    private Rigidbody2D playersBody;
-    private float playersSpeed;
-
-    public MovementControl(Rigidbody2D playersBody, float playersSpeed)
+    public void Move(Rigidbody2D playersBody, Collider2D playersCollider, float playersSpeed)
     {
-        this.playersBody = playersBody;
-        this.playersSpeed = playersSpeed;
-    }
+        Vector2 mousePos = Input.mousePosition;
+        Vector2 playersPos = Camera.main.WorldToScreenPoint(playersBody.position);
+        float angle = Mathf.Atan2(mousePos.y - playersPos.y, mousePos.x - playersPos.x) * Mathf.Rad2Deg;
+        playersBody.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-    public void Move()
-    {
         if (Input.GetKey(KeyCode.W) == true)
         {       
             playersBody.velocity = new Vector2(0, playersSpeed);
