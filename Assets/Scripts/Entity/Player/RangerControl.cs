@@ -9,11 +9,11 @@ public class RangerControl : IClassControl
         //À Ã
         if (Input.GetMouseButton(0) == true)
         {
-            player.GetComponent<SpriteRenderer>().color = Color.green;
+            player.IsAttacking = true;
         }
         else
         {
-            player.GetComponent<SpriteRenderer>().color = Color.white;
+            player.IsAttacking = false;
         }
     }
 }

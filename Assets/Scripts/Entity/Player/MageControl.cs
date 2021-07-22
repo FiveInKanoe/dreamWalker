@@ -9,11 +9,11 @@ public class MageControl : IClassControl
         //À Ã
         if (Input.GetMouseButton(0) == true)
         {
-            player.GetComponent<SpriteRenderer>().color = Color.blue;
+            player.IsAttacking = true;
         }
         else
         {
-            player.GetComponent<SpriteRenderer>().color = Color.white;
+            player.IsAttacking = false;
         }
     }
 }
