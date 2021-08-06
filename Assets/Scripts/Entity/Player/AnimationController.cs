@@ -2,26 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationController
+public class AnimationController : MonoBehaviour
 {
     enum State
     {
         NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4
     }
 
-    private Player player;
+    private Entity entity;
     private Animator animator;
 
-    public AnimationController(Player player, Animator animator)
+    void Start()
     {
-        this.player = player;
-        this.animator = animator;
+        entity = GetComponent<Entity>();
+        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
-    public void Animate(float angle)
+    void FixedUpdate()
     {
-        animator.SetBool("isAttacking", player.IsAttacking);
-        animator.SetBool("isMoving", player.IsMoving);
+        float angle = transform.rotation.eulerAngles.z;
+
+        animator.SetBool("isAttacking", entity.IsAttacking);
+        animator.SetBool("isMoving", entity.IsMoving);
 
         if (angle > 315 && angle <= 360 || angle >= 0 && angle < 45)
         {
@@ -40,4 +42,5 @@ public class AnimationController
             animator.SetInteger("direction", (int)State.SOUTH);
         }
     }
+
 }

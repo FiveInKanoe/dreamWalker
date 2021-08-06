@@ -20,9 +20,14 @@ public class Entity : MonoBehaviour
     public float ManaMax { get => manaMax; private set => manaMax = value; }
     public bool IsAlive { get => isAlive; private set => isAlive = value; }
 
-    public Entity()
+    public bool IsMoving { get; set; }
+    public bool IsAttacking { get; set; }
+
+    void Start()
     {
         IsAlive = true;
+        IsMoving = false;
+        IsAttacking = false;
     }
 
 }

@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 1881906480297041192}
   - component: {fileID: 1881906480297041193}
   - component: {fileID: 1881906480297041194}
+  - component: {fileID: -6148074030824517217}
+  - component: {fileID: -124450865765268866}
+  - component: {fileID: -4579313231824057202}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -92,6 +95,50 @@ MonoBehaviour:
   manaMax: 0
   isAlive: 1
   playerClass: 
+--- !u!114 &-6148074030824517217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881906480297041195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf53d119324df443a38eac0c447b22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-124450865765268866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881906480297041195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94582dd0874ffe47865e745003f6f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4579313231824057202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881906480297041195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ffe5c6f9a2f484aa1cd3cb37c7aad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotKey: 49
+  coolDown: 0.5
+  manaCost: 0
+  swordAmmo: {fileID: 6765856595749167943, guid: a1d289b71cbb7554987025277b795871, type: 3}
+  lifeTime: 5
+  damage: 0
+  swordSpeed: 5
+  maxSwordsCount: 3
 --- !u!1 &1881906481596999693
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class MageControl : IClassControl
     public void ControlStrategy(Player player)
     {
         //À Ã
-        if (Input.GetMouseButton(0) == true)
+        if (Input.GetMouseButton(0))
         {
             player.IsAttacking = true;
         }

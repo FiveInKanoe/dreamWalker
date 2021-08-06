@@ -6,26 +6,11 @@ public class Player : Entity
 {
     [SerializeField] private string playerClass;
 
-    private float viewAngle;
-
-    public bool IsMoving { get; set; }
-    public bool IsAttacking { get; set; }
-
-    private MovementControl movementControl;
     private IClassControl classControl;
-    private AnimationController animController;
 
-    private GameObject spriteObject;
 
     void Start()
     {
-        IsMoving = false;
-        IsAttacking = false;
-
-        spriteObject = transform.GetChild(0).gameObject;
-
-        movementControl = new MovementControl(this);
-        animController = new AnimationController(this, spriteObject.GetComponent<Animator>());
 
         playerClass = playerClass.ToLower();
 
@@ -45,12 +30,7 @@ public class Player : Entity
 
     void FixedUpdate()
     {
-        
-        viewAngle = transform.rotation.eulerAngles.z;
-        movementControl.Move();
-        classControl.ControlStrategy(this);
-        animController.Animate(viewAngle);
-        
+        classControl.ControlStrategy(this);       
     }
 
     private void LateUpdate()

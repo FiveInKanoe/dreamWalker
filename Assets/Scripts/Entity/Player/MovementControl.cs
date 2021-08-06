@@ -2,76 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementControl
+public class MovementControl : MonoBehaviour
 {
-    private Player player;
-    private Rigidbody2D playersBody;
+    private Entity entity;
+    private Rigidbody2D entityBody;
 
-    public MovementControl(Player player)
+    void Start()
     {
-        this.player = player;
-        playersBody = player.GetComponent<Rigidbody2D>();
+        entity = GetComponent<Entity>();
+        entityBody = GetComponent<Rigidbody2D>();
     }
 
-    public void Move()
+    private void FixedUpdate()
     {
         //Input.GetAxis("Horizontal") == 1     Input.GetAxisRaw("Vertical") == 1  
-        float playersSpeed = player.Speed;
-
+        float playersSpeed = entity.Speed;
         Vector2 mousePos = Input.mousePosition;
-        Vector2 playersPos = Camera.main.WorldToScreenPoint(playersBody.position);
+        Vector2 playersPos = Camera.main.WorldToScreenPoint(entityBody.position);
         float angle = Mathf.Atan2(mousePos.y - playersPos.y, mousePos.x - playersPos.x) * Mathf.Rad2Deg;
-        playersBody.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        entityBody.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        if (Input.GetKey(KeyCode.W) == true)
+        if (Input.GetKey(KeyCode.W))
         {
-            playersBody.velocity = new Vector2(0, playersSpeed);
+            entityBody.velocity = new Vector2(0, playersSpeed);
         }
-        if (Input.GetKey(KeyCode.S) == true)
+        if (Input.GetKey(KeyCode.S))
         {
-            playersBody.velocity = new Vector2(0, -playersSpeed);
+            entityBody.velocity = new Vector2(0, -playersSpeed);
         }
-        if (Input.GetKey(KeyCode.A) == true)
+        if (Input.GetKey(KeyCode.A))
         {
-            playersBody.velocity = new Vector2(-playersSpeed, 0);
+            entityBody.velocity = new Vector2(-playersSpeed, 0);
         }
-        if (Input.GetKey(KeyCode.D) == true)
+        if (Input.GetKey(KeyCode.D))
         {
-            playersBody.velocity = new Vector2(playersSpeed, 0);
+            entityBody.velocity = new Vector2(playersSpeed, 0);
         }
-        if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.D) == true)
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
-            playersBody.velocity = new Vector2(playersSpeed, playersSpeed);
+            entityBody.velocity = new Vector2(playersSpeed, playersSpeed);
         }
-        if (Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.A) == true)
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
         {
-            playersBody.velocity = new Vector2(-playersSpeed, playersSpeed);
+            entityBody.velocity = new Vector2(-playersSpeed, playersSpeed);
         }
-        if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.D) == true)
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
-            playersBody.velocity = new Vector2(playersSpeed, -playersSpeed);
+            entityBody.velocity = new Vector2(playersSpeed, -playersSpeed);
         }
-        if (Input.GetKey(KeyCode.S) == true && Input.GetKey(KeyCode.A) == true)
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
         {
-            playersBody.velocity = new Vector2(-playersSpeed, -playersSpeed);
+            entityBody.velocity = new Vector2(-playersSpeed, -playersSpeed);
         }
 
-        bool isMoving = Input.GetKey(KeyCode.W) == true || Input.GetKey(KeyCode.A) == true ||
-                        Input.GetKey(KeyCode.S) == true || Input.GetKey(KeyCode.D) == true;
-        bool conflictX = Input.GetKey(KeyCode.A) == true && Input.GetKey(KeyCode.D) == true;
-        bool conflictY = Input.GetKey(KeyCode.W) == true && Input.GetKey(KeyCode.S) == true;
+        bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+                        Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+        bool conflictX = Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D);
+        bool conflictY = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S);
 
-        
-        if (!isMoving || conflictX || conflictY || player.IsAttacking)
+
+        if (!isMoving || conflictX || conflictY)
         {
-            playersBody.velocity = new Vector2(0, 0);
-            player.IsMoving = false;
+            entityBody.velocity = new Vector2(0, 0);
+            entity.IsMoving = false;
         }
         else
         {
-            player.IsMoving = true;
+            entity.IsMoving = true;
         }
-        
-
     }
 }
