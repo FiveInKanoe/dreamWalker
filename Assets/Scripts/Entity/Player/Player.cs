@@ -11,7 +11,6 @@ public class Player : Entity
 
     void Start()
     {
-
         playerClass = playerClass.ToLower();
 
         switch (playerClass)
@@ -25,7 +24,8 @@ public class Player : Entity
             default:
                 classControl = new WarriorControl();
                 break;
-        }     
+        }
+
     }
 
     void FixedUpdate()

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
+    [SerializeField] protected GameObject skillContainer;
     [SerializeField] private KeyCode hotKey;
     [SerializeField] private float coolDown;
     [SerializeField] private float manaCost;
-
-    protected GameObject skillContainer;
 
     protected float nextUsageTime;
 
@@ -19,7 +18,6 @@ public abstract class Skill : MonoBehaviour
     protected void Start()
     {
         nextUsageTime = 0;
-        skillContainer = new GameObject("SkillContainer");
     }
 
     public abstract void Usage();

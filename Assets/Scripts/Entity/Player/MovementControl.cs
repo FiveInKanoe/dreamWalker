@@ -64,11 +64,8 @@ public class MovementControl : MonoBehaviour
         if (!isMoving || conflictX || conflictY)
         {
             entityBody.velocity = new Vector2(0, 0);
-            entity.IsMoving = false;
+            isMoving = false;
         }
-        else
-        {
-            entity.IsMoving = true;
-        }
+        entity.IsMoving = isMoving;
     }
 }
