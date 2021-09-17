@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blink : Skill
+
+[CreateAssetMenu(fileName = "Blink", menuName = "Skills/Blink")]
+public class Blink : Skills
 {
     [SerializeField] private float maxRadius;
     [SerializeField] private Sprite markerSprite;
@@ -16,22 +18,42 @@ public class Blink : Skill
     private bool isBlinkPerformed;
     private bool isKeyPressed;
 
-    new void Start()
+
+    public override void Init(GameObject gameObject, GameObject skillContainer)
     {
-        base.Start();
+        NextUsageTime = 0;
+        this.SkillContainer = skillContainer;
         isBlinkPerformed = false;
         isKeyPressed = false;
-        entity = GetComponent<Entity>();
+        entity = gameObject.GetComponent<Entity>();
         blinkCont = new GameObject("Blink");
-        blinkCont.transform.SetParent(skillContainer.transform);
+        blinkCont.transform.SetParent(this.SkillContainer.transform);
     }
 
     public override void Usage()
     {
+        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        {
+            isKeyPressed = true;
+        }
+        if (isKeyPressed && !isBlinkPerformed)
+        {
+            Perform();
+            if (isBlinkPerformed)
+            {
+                isBlinkPerformed = false;
+                NextUsageTime = Time.time + CoolDown;
+                isKeyPressed = false;
+            }
+        }
+    }
+
+    private void Perform()
+    {
         if (marker == null)
         {
             initMarker();
-        }  
+        }
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 entityPosition = entity.transform.position;
 
@@ -42,8 +64,8 @@ public class Blink : Skill
             float distanceRatio = maxRadius / fullDistance;
             marker.transform.position = new Vector3
                 (
-                entityPosition.x + (mousePosition.x - entityPosition.x) * distanceRatio,
-                entityPosition.y + (mousePosition.y - entityPosition.y) * distanceRatio,
+                Mathf.Lerp(entityPosition.x, mousePosition.x, distanceRatio),
+                Mathf.Lerp(entityPosition.y, mousePosition.y, distanceRatio),
                 entity.transform.position.z
                 );
         }
@@ -81,21 +103,7 @@ public class Blink : Skill
         marker.transform.localScale = new Vector3(0.5f, 0.5f, 1);
     }
 
-    void FixedUpdate()
-    {
-        if (Input.GetKey(HotKey) && Time.time > nextUsageTime)
-        {
-            isKeyPressed = true;
-        }
-        if (isKeyPressed && !isBlinkPerformed)
-        {
-            Usage();
-            if (isBlinkPerformed)
-            {
-                isBlinkPerformed = false;
-                nextUsageTime = Time.time + CoolDown;
-                isKeyPressed = false;
-            }           
-        }
-    }
+    
+
+    
 }

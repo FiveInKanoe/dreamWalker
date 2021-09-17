@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingSword : Skill
+[CreateAssetMenu(fileName = "FlyingSword", menuName = "Skills/Flying Sword")]
+public class FlyingSword : Skills
 {
     [SerializeField] private GameObject swordAmmo;
     [SerializeField] private float lifeTime;
@@ -13,30 +13,44 @@ public class FlyingSword : Skill
 
     private GameObject flyingSwordCont;
 
-    new void Start()
+    private GameObject entity;
+
+    public override void Init(GameObject gameObject, GameObject skillContainer)
     {
-        base.Start();
+        NextUsageTime = 0;
+        this.SkillContainer = skillContainer;
+        entity = gameObject;
         flyingSwordCont = new GameObject("FlyingSword");
-        flyingSwordCont.transform.SetParent(skillContainer.transform);
+        flyingSwordCont.transform.SetParent(this.SkillContainer.transform);
     }
 
     public override void Usage()
+    {
+        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        {
+            Perform();
+            NextUsageTime = Time.time + CoolDown;
+        }
+    }
+
+    private void Perform()
     {
 
         if (flyingSwordCont.transform.childCount < maxSwordsCount)
         {
             GameObject currentSword = Instantiate(swordAmmo, flyingSwordCont.transform);
 
-            currentSword.transform.position = transform.position;
-            currentSword.transform.rotation = transform.rotation;
+            currentSword.transform.position = entity.transform.position;
+            currentSword.transform.rotation = entity.transform.rotation;
 
             currentSword.GetComponent<Rigidbody2D>().velocity = new Vector2
                 (
-                Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed,
-                Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed
+                Mathf.Cos(entity.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed,
+                Mathf.Sin(entity.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed
                 );
             Destroy(currentSword, lifeTime);
         }
     }
 
+    
 }

@@ -2,10 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
-{
-    [SerializeField] private int Id;
 
-    public abstract void Usage(Player player); //А надо ли это?
+public enum ItemType
+{
+    Equipment,
+    Potions,
+    Ammo
+}
+
+
+public abstract class Item : ScriptableObject
+{
+    [SerializeField] private int id;
+    [SerializeField] private Sprite sprite;
+    [SerializeField, TextArea(15, 20)] private string description;
+
+    public int ID { get => id; private set => id = value; }
+    public Sprite Sprite{ get => sprite; protected set => sprite = value;}
+
+    public Entity TargetEntity { get; set; }
 
 }

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rage : Skill
+[CreateAssetMenu(fileName = "Rage", menuName = "Skills/Rage")]
+public class Rage : Skills
 {
     [SerializeField] private float activeTime;
     [SerializeField] private float bonusDamage;
@@ -11,21 +12,22 @@ public class Rage : Skill
     [SerializeField] private float growthCoef;
     [SerializeField] private Color rageColor;
 
+
     private float endOfEffectTime;
     private Entity entity;
+
 
     private Transform sprite;
     private SpriteRenderer spriteRenderer;
 
-    
-
-    new void Start()
+    public override void Init(GameObject gameObject, GameObject skillContainer)
     {
-        base.Start();
+        NextUsageTime = 0;
+        this.SkillContainer = skillContainer;
         endOfEffectTime = 0;
         growthCoef = 1.2f;
-        entity = GetComponent<Entity>();
-        sprite = transform.GetChild(0);
+        entity = gameObject.GetComponent<Entity>();
+        sprite = gameObject.transform.GetChild(0);
         if (sprite != null)
         {
             spriteRenderer = sprite.GetComponent<SpriteRenderer>();
@@ -33,6 +35,21 @@ public class Rage : Skill
     }
 
     public override void Usage()
+    {
+        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        {
+            Perform();
+            NextUsageTime = Time.time + CoolDown;
+            endOfEffectTime = Time.time + activeTime;
+        }
+        if (endOfEffectTime != 0 && Time.time > endOfEffectTime)
+        {
+            ToDefault();
+            endOfEffectTime = 0;
+        }
+    }
+
+    private void Perform()
     {
         entity.Damage += bonusDamage;
         entity.AttackSpeed += bonusAttackSpeed;
@@ -45,21 +62,6 @@ public class Rage : Skill
                 sprite.localScale.y * growthCoef
                 );
             spriteRenderer.color = rageColor;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (Input.GetKey(HotKey) && Time.time > nextUsageTime)
-        {
-            Usage();
-            nextUsageTime = Time.time + CoolDown;
-            endOfEffectTime = Time.time + activeTime;
-        }
-        if (endOfEffectTime != 0 && Time.time > endOfEffectTime)
-        {
-            ToDefault();
-            endOfEffectTime = 0;
         }
     }
 
