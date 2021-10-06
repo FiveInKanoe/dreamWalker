@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    enum State
-    {
-        NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4
-    }
-
     private Entity entity;
     private Animator animator;
 
@@ -27,19 +22,19 @@ public class AnimationController : MonoBehaviour
 
         if (angle > 315 && angle <= 360 || angle >= 0 && angle < 45)
         {
-            animator.SetInteger("direction", (int)State.EAST);
+            animator.SetInteger("direction", (int)Direction.EAST);
         }
         if (angle >= 45 && angle <= 135)
         {
-            animator.SetInteger("direction", (int)State.NORTH);
+            animator.SetInteger("direction", (int)Direction.NORTH);
         }
         if (angle > 135 && angle < 225)
         {
-            animator.SetInteger("direction", (int)State.WEST);
+            animator.SetInteger("direction", (int)Direction.WEST);
         }
         if (angle >= 225 && angle <= 315)
         {
-            animator.SetInteger("direction", (int)State.SOUTH);
+            animator.SetInteger("direction", (int)Direction.SOUTH);
         }
     }
 

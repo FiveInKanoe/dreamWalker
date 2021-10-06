@@ -52,7 +52,7 @@ public class Blink : Skills
     {
         if (marker == null)
         {
-            initMarker();
+            InitMarker();
         }
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 entityPosition = entity.transform.position;
@@ -93,7 +93,7 @@ public class Blink : Skills
         }
     }
 
-    private void initMarker()
+    private void InitMarker()
     {
         marker = new GameObject("Marker");
         marker.transform.SetParent(blinkCont.transform);

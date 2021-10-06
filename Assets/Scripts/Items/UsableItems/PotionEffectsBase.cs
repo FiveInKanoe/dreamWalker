@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*TODO
+ - Снести всё к херам
+ - Каждый эффект реаоизовать через класс
+ 
+ */
+
 public enum PotionType
 {
     HEALTH,

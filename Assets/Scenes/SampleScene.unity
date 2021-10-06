@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f7d770b94f0a41913a34303345f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphGen: {fileID: 11400000, guid: 573c2dd2d10f94e4599a9b7d4b686923, type: 2}
+  clustGen: {fileID: 11400000, guid: 7827d93fa4122e74c8a8b8415f14cf42, type: 2}
 --- !u!1001 &678660807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -533,7 +533,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817636186}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05487cc4d2fd127409084d1e6df8bf0d, type: 3}
   m_Name: 
@@ -543,7 +543,7 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: 3e57806b81b8f2e4e954b244169a260e, type: 2}
   groundTile: {fileID: 11400000, guid: 7ca9c977ebf8f3c49b6f196336b83c32, type: 2}
   generators:
-  - {fileID: 11400000, guid: b288a182bf1ee314a9873f489c047fef, type: 2}
+  - {fileID: 11400000, guid: 064788f12e223614bb654d8fbda9e070, type: 2}
 --- !u!1001 &886403324
 PrefabInstance:
   m_ObjectHideFlags: 0
