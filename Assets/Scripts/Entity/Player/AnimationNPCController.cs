@@ -41,42 +41,75 @@ public class AnimationNPCController
         // Debug.Log(NPCFSM.GetFloat("distance"));
         // Debug.Log(animator.GetFloat("distance"));
         // animator.SetInteger("direction", (int)State.EAST);
-        if (NPCFSM.GetBehaviour<Patrol>() != null)
+        // if (NPCFSM.GetBehaviour<Patrol>() != null)
+        // {
+        //     float deltaX = NPCFSM.GetBehaviour<Patrol>().nowGoal.x - npc.transform.position.x;
+        //     float deltaY = NPCFSM.GetBehaviour<Patrol>().nowGoal.y - npc.transform.position.y;
+        //     float _angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
+        //     if (_angle < 0)
+        //     {
+        //         _angle = Mathf.Abs(_angle) + 180;
+        //     }
+        //     // float _angle = (Mathf.Abs(Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg));
+        //     Debug.Log(_angle);
+        //     // if
+        //     Debug.Log("DIRECTION: " + animator.GetInteger("direction"));
+        //     if (_angle > 315 && _angle <= 360 || _angle >= 0 && _angle < 45)
+        //     {
+        //         Debug.Log("EAST");
+        //         // animator.SetInteger("direction", (int)State.EAST);
+        //         animator.SetInteger("direction", (int)State.WEST);
+        //     }
+        //     if (_angle >= 45 && _angle <= 135)
+        //     {
+        //         Debug.Log("NORTH");
+        //         animator.SetInteger("direction", (int)State.NORTH);
+        //     }
+        //     if (_angle > 135 && _angle < 225)
+        //     {
+        //         Debug.Log("WEST");
+        //         // animator.SetInteger("direction", (int)State.WEST);
+        //         animator.SetInteger("direction", (int)State.EAST);
+        //     }
+        //     if (_angle >= 225 && _angle <= 315)
+        //     {
+        //         Debug.Log("SOUTH");
+        //         animator.SetInteger("direction", (int)State.SOUTH);
+        //     }
+        // }
+        // Debug.Log(NPC.GetComponent<NPCAI>().GetAgent().velocity);
+        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().GetAgent().velocity;
+        Direction _directionCalculated;
+        if (Mathf.Abs(_driectionVecotr3.x) > Mathf.Abs(_driectionVecotr3.y))
         {
-            float deltaX = NPCFSM.GetBehaviour<Patrol>().nowGoal.x - npc.transform.position.x;
-            float deltaY = NPCFSM.GetBehaviour<Patrol>().nowGoal.y - npc.transform.position.y;
-            float _angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
-            if (_angle < 0)
+            //Horizontal
+            if (_driectionVecotr3.x > 0)
             {
-                _angle = Mathf.Abs(_angle) + 180;
+                //right
+                _directionCalculated = Direction.EAST;
             }
-            // float _angle = (Mathf.Abs(Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg));
-            Debug.Log(_angle);
-            // if
-            Debug.Log("DIRECTION: " + animator.GetInteger("direction"));
-            if (_angle > 315 && _angle <= 360 || _angle >= 0 && _angle < 45)
+            else
             {
-                Debug.Log("EAST");
-                // animator.SetInteger("direction", (int)State.EAST);
-                animator.SetInteger("direction", (int)State.WEST);
-            }
-            if (_angle >= 45 && _angle <= 135)
-            {
-                Debug.Log("NORTH");
-                animator.SetInteger("direction", (int)State.NORTH);
-            }
-            if (_angle > 135 && _angle < 225)
-            {
-                Debug.Log("WEST");
-                // animator.SetInteger("direction", (int)State.WEST);
-                animator.SetInteger("direction", (int)State.EAST);
-            }
-            if (_angle >= 225 && _angle <= 315)
-            {
-                Debug.Log("SOUTH");
-                animator.SetInteger("direction", (int)State.SOUTH);
+                //left
+                _directionCalculated = Direction.WEST;
             }
         }
+        else
+        {
+            //Vertical
+            if (_driectionVecotr3.y > 0)
+            {
+                //up
+                _directionCalculated = Direction.NORTH;
+            }
+            else
+            {
+                //down
+                _directionCalculated = Direction.SOUTH;
+            }
+        }
+        animator.SetInteger("direction", (int)_directionCalculated);
+
 
 
         // Debug.Log();
