@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Patrol : NPCBaseFSM
 {
-    GameObject[] waypoints;
-    int currentWP;
-    new float speed = 1.5f;
+    public GameObject[] waypoints { get; set; }
+    public int currentWP { get; set; }
+    public Vector3 nowGoal { get; set; }
+    private float speed = 1.5f;
 
     void Awake()
     {
@@ -50,8 +51,12 @@ public class Patrol : NPCBaseFSM
         // NPC.transform.position = Vector3.MoveTowards(NPC.transform.position, waypoints[currentWP].transform.position, speed * Time.deltaTime);
 
         // Debug.Log(this.speed);
-        // Debug.Log(speed);
+        // Debug.Log(Transform.);
         NPC.GetComponent<NPCAI>().GetAgent().SetDestination(waypoints[currentWP].transform.position);
+        nowGoal = waypoints[currentWP].transform.position;
+        // float angle = Mathf.Atan2(NPC.GetComponent<NPCAI>().GetAgent().transform.position, waypoints[currentWP].transform.position) * Mathf.Rad2Deg;
+        // Debug.Log("DESTINATION: " + waypoints[currentWP].transform.position);
+        // Debug.Log("angle: " + NPC.);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

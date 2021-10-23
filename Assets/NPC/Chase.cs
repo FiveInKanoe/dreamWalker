@@ -15,7 +15,7 @@ public class Chase : NPCBaseFSM
     {
         // NPC.transform.position = Vector3.MoveTowards(NPC.transform.position, opponent.transform.position, speed * Time.deltaTime);
         NPC.GetComponent<NPCAI>().GetAgent().SetDestination(opponent.transform.position);
-
+        // if(opponent.transform.position<=NPC.)
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
