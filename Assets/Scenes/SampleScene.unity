@@ -274,6 +274,8 @@ MonoBehaviour:
   clustGen: {fileID: 11400000, guid: 7827d93fa4122e74c8a8b8415f14cf42, type: 2}
   structures:
   - {fileID: 4453474518204534992, guid: 8402ba72ffdcadb4facb43b4a7685d19, type: 3}
+  - {fileID: 3258812674013115387, guid: ffaa8c678142af6419194b2983613e23, type: 3}
+  probability: 0.13
 --- !u!156049354 &219926345
 Grid:
   m_ObjectHideFlags: 0
