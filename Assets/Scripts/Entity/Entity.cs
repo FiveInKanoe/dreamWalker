@@ -21,13 +21,17 @@ public class Entity : MonoBehaviour
     public float HpMax { get => hpMax; set => hpMax = value; }
     public float ManaMax { get => manaMax; set => manaMax = value; }
     public bool IsAlive { get => isAlive; set => isAlive = value; }
-
+    public int TestProp
+    {
+        get { return 0; }
+        set { }
+    }
     public bool IsMoving { get; set; }
     public bool IsAttacking { get; set; }
 
 
     void Start()
-    {       
+    {
         IsAlive = true;
         IsMoving = false;
         IsAttacking = false;

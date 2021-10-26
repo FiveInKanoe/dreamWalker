@@ -42,7 +42,7 @@ public class Player : Entity
         {
             skill.Usage();
         }
-        classControl.ControlStrategy(this);       
+        classControl.ControlStrategy(this);
     }
 
     private void LateUpdate()
@@ -53,7 +53,7 @@ public class Player : Entity
     void OnTriggerEnter2D(Collider2D collision)
     {
         Collectable collectableItem = collision.GetComponent<Collectable>();
-        if(collectableItem != null && collectableItem.ItemInfo != null)
+        if (collectableItem != null && collectableItem.ItemInfo != null)
         {
             inventory.AddItem(collectableItem.ItemInfo, 1);
             collectableItem.ItemInfo.TargetEntity = this;
@@ -63,6 +63,6 @@ public class Player : Entity
 
     void OnApplicationQuit()
     {
-        inventory.ClearInventory();
+        // inventory.ClearInventory();
     }
 }
