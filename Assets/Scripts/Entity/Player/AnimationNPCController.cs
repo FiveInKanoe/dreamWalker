@@ -31,7 +31,7 @@ public class AnimationNPCController
             npc.IsAttacking = false;
         }
 
-        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().GetAgent().velocity;
+        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().agent.velocity;
         Direction _directionCalculated;
         if (Mathf.Abs(_driectionVecotr3.x) > Mathf.Abs(_driectionVecotr3.y))
         {

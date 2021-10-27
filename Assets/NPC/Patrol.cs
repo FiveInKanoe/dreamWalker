@@ -37,17 +37,14 @@ public class Patrol : NPCBaseFSM
         waypoints = new List<Vector3>();
         waypoints.Add(NPC.transform.position);
         navMeshPath = new NavMeshPath();
-        NPC.GetComponent<NPCAI>().GetAgent().acceleration = 60;
-        agent = NPC.GetComponent<NPCAI>().GetAgent();
+        NPC.GetComponent<NPCAI>().agent.acceleration = 60;
+        agent = NPC.GetComponent<NPCAI>().agent;
         GenerateWayPoints();
-
-        // GetAgent().CalculatePath(to.transform.position, navMeshPath);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Debug.Log("OFFMSAK" + NavMeshSurface2d.);
         // Проверка наличия точек
         if (waypoints.Count != 0)
         {
@@ -57,7 +54,7 @@ public class Patrol : NPCBaseFSM
             {
                 if (sleepFlag)
                 {
-                    sleepTime = Time.time + 2;
+                    sleepTime = Time.time + 1;
                     sleepFlag = false;
                 }
                 if (Time.time > sleepTime)
@@ -71,20 +68,9 @@ public class Patrol : NPCBaseFSM
                     }
                 }
             }
-            NPC.GetComponent<NPCAI>().GetAgent().SetDestination(waypoints[currentWP]);
-            // Debug.Log(NPC.transform.position);
+            NPC.GetComponent<NPCAI>().agent.SetDestination(waypoints[currentWP]);
             nowGoal = waypoints[currentWP];
         }
-        // agent.CalculatePath(NPC.GetComponent<NPCAI>().GetPlayer().transform.position, navMeshPath);
-        // if (navMeshPath.status == NavMeshPathStatus.PathComplete)
-        // {
-        //     Debug.Log("YES");
-        // }
-        // else
-        // {
-        //     Debug.Log("NO");
-
-        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -106,24 +92,15 @@ public class Patrol : NPCBaseFSM
             float _x = Random.Range(NPC.transform.position.x - radisWaypoint, NPC.transform.position.x + radisWaypoint);
             float _y = Random.Range(NPC.transform.position.y - radisWaypoint, NPC.transform.position.y + radisWaypoint);
             float _z = 0;
-            Debug.Log("X: " + _x + " Y: " + _y + " Z: " + _z);
             Vector3 _newWaypoint = new Vector3(_x, _y, _z);
             agent.CalculatePath(_newWaypoint, navMeshPath);
             if (waypoints.Count < countWaypoint)
             {
                 if (navMeshPath.status == NavMeshPathStatus.PathComplete)
                 {
-                    GameObject _temp = new GameObject();
-                    _temp.transform.position = _newWaypoint;
-                    Debug.Log("YES" + _newWaypoint);
                     waypoints.Add(_newWaypoint);
-                }
-                else
-                {
-                    Debug.Log("NO" + _newWaypoint);
                 }
             }
         }
-        Debug.Log("Count: " + waypoints.Count);
     }
 }

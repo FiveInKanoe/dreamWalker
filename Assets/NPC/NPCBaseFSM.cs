@@ -15,9 +15,9 @@ public class NPCBaseFSM : StateMachineBehaviour
     {
         NPC = animator.gameObject;
         opponent = NPC.GetComponent<NPCAI>().GetPlayer();
-        agent = NPC.GetComponent<NPCAI>().GetAgent();
+        agent = NPC.GetComponent<NPCAI>().agent;
 
-        NPC.GetComponent<NPCAI>().GetAgent().updateRotation = false;
-        NPC.GetComponent<NPCAI>().GetAgent().updateUpAxis = false;
+        NPC.GetComponent<NPCAI>().agent.updateRotation = false;
+        NPC.GetComponent<NPCAI>().agent.updateUpAxis = false;
     }
 }
