@@ -35,10 +35,10 @@ public class Patrol : NPCBaseFSM
         countWaypoint = 5;
 
         waypoints = new List<Vector3>();
-        waypoints.Add(NPC.transform.position);
+        waypoints.Add(PrefabNPC.transform.position);
         navMeshPath = new NavMeshPath();
-        NPC.GetComponent<NPCAI>().agent.acceleration = 60;
-        agent = NPC.GetComponent<NPCAI>().agent;
+        PrefabNPC.GetComponent<NPCAI>().Agent.acceleration = 60;
+        agent = PrefabNPC.GetComponent<NPCAI>().Agent;
         GenerateWayPoints();
     }
 
@@ -50,7 +50,7 @@ public class Patrol : NPCBaseFSM
         {
 
             //Преверка расстояния между точкой НПС
-            if (Vector2.Distance(waypoints[currentWP], NPC.transform.position) < 1.0f)
+            if (Vector2.Distance(waypoints[currentWP], PrefabNPC.transform.position) < 1.0f)
             {
                 if (sleepFlag)
                 {
@@ -68,7 +68,7 @@ public class Patrol : NPCBaseFSM
                     }
                 }
             }
-            NPC.GetComponent<NPCAI>().agent.SetDestination(waypoints[currentWP]);
+            PrefabNPC.GetComponent<NPCAI>().Agent.SetDestination(waypoints[currentWP]);
             nowGoal = waypoints[currentWP];
         }
     }
@@ -89,8 +89,8 @@ public class Patrol : NPCBaseFSM
                 break;
             }
             index++;
-            float _x = Random.Range(NPC.transform.position.x - radisWaypoint, NPC.transform.position.x + radisWaypoint);
-            float _y = Random.Range(NPC.transform.position.y - radisWaypoint, NPC.transform.position.y + radisWaypoint);
+            float _x = Random.Range(PrefabNPC.transform.position.x - radisWaypoint, PrefabNPC.transform.position.x + radisWaypoint);
+            float _y = Random.Range(PrefabNPC.transform.position.y - radisWaypoint, PrefabNPC.transform.position.y + radisWaypoint);
             float _z = 0;
             Vector3 _newWaypoint = new Vector3(_x, _y, _z);
             agent.CalculatePath(_newWaypoint, navMeshPath);

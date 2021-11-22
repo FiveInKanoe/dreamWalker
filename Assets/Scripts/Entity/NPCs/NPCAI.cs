@@ -10,11 +10,8 @@ public class NPCAI : MonoBehaviour
     private Animator animator;
     private NavMeshAgent agent;
 
-    public GameObject GetPlayer()
-    {
-        Debug.Log(player);
-        return player;
-    }
+    public GameObject Player { get => player; }
+    public NavMeshAgent Agent { get => agent; }
 
     void Start()
     {
@@ -27,7 +24,5 @@ public class NPCAI : MonoBehaviour
     {
         animator.SetFloat("distance", Vector3.Distance(transform.position, player.transform.position));
         Debug.Log(Vector3.Distance(transform.position, player.transform.position));
-
-
     }
 }

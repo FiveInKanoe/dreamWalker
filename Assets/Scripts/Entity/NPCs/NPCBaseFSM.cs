@@ -11,16 +11,16 @@ public abstract class NPCBaseFSM : StateMachineBehaviour
     protected GameObject PrefabNPC { get => prefabNPC; set => prefabNPC = value; }
     protected GameObject Opponent { get => opponent; set => opponent = value; }
 
-    //Передавать PrefabNPC в OnEnable только в абстрактном классе
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ PrefabNPC пїЅ OnEnable пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         prefabNPC = animator.gameObject;
-        opponent = prefabNPC.GetComponent<NPCAI>().GetPlayer();
+        opponent = prefabNPC.GetComponent<NPCAI>().Player;
 
-        prefabNPC.GetComponent<NPCAI>().GetAgent().updateRotation = false;
-        prefabNPC.GetComponent<NPCAI>().GetAgent().updateUpAxis = false;
+        prefabNPC.GetComponent<NPCAI>().Agent.updateRotation = false;
+        prefabNPC.GetComponent<NPCAI>().Agent.updateUpAxis = false;
     }
-    
+
 }

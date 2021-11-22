@@ -19,41 +19,19 @@ public class AnimationNPCController
 
     public void Animate()
     {
-<<<<<<< HEAD
-        animator.SetBool("isAttacking", npc.IsAttacking);
-        animator.SetBool("isMoving", npc.IsMoving);
-
-        //attack
-        if (NPCFSM.GetFloat("distance") <= 1)
-        {
-            npc.IsAttacking = true;
-        }
-        else
-        {
-            npc.IsAttacking = false;
-        }
-=======
         //REWRITE IT
         animator.SetBool("isAttacking", npc.Stats.IsAttacking);
         animator.SetBool("isMoving", npc.Stats.IsMoving);
         // animator.SetInteger("direction", (int)State.WEST);
         //attack (1 поменять на атакующую дистанцию)
         npc.Stats.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
->>>>>>> Vitalii
 
-        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().agent.velocity;
-        Direction _directionCalculated;
+        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().Agent.velocity;
+        // Direction _directionCalculated;
         if (Mathf.Abs(_driectionVecotr3.x) > Mathf.Abs(_driectionVecotr3.y))
         {
-<<<<<<< HEAD
-            //Horizontal
-            if (_driectionVecotr3.x > 0)
-            {
-                //right
-                _directionCalculated = Direction.EAST;
-=======
-            float deltaX = NPCFSM.GetBehaviour<Patrol>().NowGoal.x - npc.transform.position.x;
-            float deltaY = NPCFSM.GetBehaviour<Patrol>().NowGoal.y - npc.transform.position.y;
+            float deltaX = NPCFSM.GetBehaviour<Patrol>().nowGoal.x - npc.transform.position.x;
+            float deltaY = NPCFSM.GetBehaviour<Patrol>().nowGoal.y - npc.transform.position.y;
             float _angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
             if (_angle < 0)
             {
@@ -68,17 +46,11 @@ public class AnimationNPCController
                 Debug.Log("EAST");
                 // animator.SetInteger("direction", (int)State.EAST);
                 animator.SetInteger("direction", (int)Direction.WEST);
->>>>>>> Vitalii
             }
             else
             {
-<<<<<<< HEAD
-                //left
-                _directionCalculated = Direction.WEST;
-=======
                 Debug.Log("NORTH");
                 animator.SetInteger("direction", (int)Direction.NORTH);
->>>>>>> Vitalii
             }
         }
         else
@@ -86,27 +58,17 @@ public class AnimationNPCController
             //Vertical
             if (_driectionVecotr3.y > 0)
             {
-<<<<<<< HEAD
-                //up
-                _directionCalculated = Direction.NORTH;
-=======
                 Debug.Log("WEST");
                 // animator.SetInteger("direction", (int)State.WEST);
                 animator.SetInteger("direction", (int)Direction.EAST);
->>>>>>> Vitalii
             }
             else
             {
-<<<<<<< HEAD
-                //down
-                _directionCalculated = Direction.SOUTH;
-=======
                 Debug.Log("SOUTH");
                 animator.SetInteger("direction", (int)Direction.SOUTH);
->>>>>>> Vitalii
             }
         }
-        animator.SetInteger("direction", (int)_directionCalculated);
+        // animator.SetInteger("direction", (int)_directionCalculated);
 
     }
 }

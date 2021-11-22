@@ -5,28 +5,16 @@ using UnityEngine.AI;
 
 public class NPC : Entity
 {
-<<<<<<< HEAD
-    [SerializeField] private static GameObject navMesh;
-    private float viewAngle;
-    public Vector3 posCurrentWP;
-    public bool IsMoving { get; set; }
-    public bool IsAttacking { get; set; }
-    public int attackRadius = 100;
-=======
 
     //private int attackRadius = 100;
->>>>>>> Vitalii
 
     private AnimationNPCController animController;
 
     private GameObject spriteObject;
-<<<<<<< HEAD
-=======
 
     public Vector3 PosCurrentWP { get; set; }
     public float AttackRadius { get; set; }
 
->>>>>>> Vitalii
     void Start()
     {
         Stats.IsMoving = true;
