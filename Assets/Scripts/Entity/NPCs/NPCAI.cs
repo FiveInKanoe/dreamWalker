@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class NPCAI : MonoBehaviour
 {
-    Animator animator;
-    public GameObject player;
-    public NavMeshAgent agent;
+    [SerializeField] private GameObject player;
+
+    private Animator animator;
+    private NavMeshAgent agent;
+
     public GameObject GetPlayer()
     {
         return player;
@@ -26,6 +28,7 @@ public class NPCAI : MonoBehaviour
     void Update()
     {
         animator.SetFloat("distance", Vector3.Distance(transform.position, player.transform.position));
+        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
 
 
     }

@@ -8,7 +8,7 @@ public class Rage : Skills
     [SerializeField] private float activeTime;
     [SerializeField] private float bonusDamage;
     [SerializeField] private float bonusAttackSpeed;
-    [SerializeField] private float bonusSpeed;
+    [SerializeField] private float bonusVelocity;
     [SerializeField] private float growthCoef;
     [SerializeField] private Color rageColor;
 
@@ -51,9 +51,9 @@ public class Rage : Skills
 
     private void Perform()
     {
-        entity.Damage += bonusDamage;
-        entity.AttackSpeed += bonusAttackSpeed;
-        entity.Speed += bonusSpeed;
+        entity.Stats.Damage += bonusDamage;
+        entity.Stats.AttackSpeed += bonusAttackSpeed;
+        entity.Stats.Velocity += bonusVelocity;
         if (spriteRenderer != null)
         {
             sprite.localScale = new Vector2
@@ -67,9 +67,9 @@ public class Rage : Skills
 
     private void ToDefault()
     {
-        entity.Damage -= bonusDamage;
-        entity.AttackSpeed -= bonusAttackSpeed;
-        entity.Speed -= bonusSpeed;
+        entity.Stats.Damage -= bonusDamage;
+        entity.Stats.AttackSpeed -= bonusAttackSpeed;
+        entity.Stats.Velocity -= bonusVelocity;
         if (spriteRenderer != null)
         {
             sprite.localScale = new Vector2

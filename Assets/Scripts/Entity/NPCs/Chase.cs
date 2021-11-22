@@ -14,7 +14,7 @@ public class Chase : NPCBaseFSM
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // NPC.transform.position = Vector3.MoveTowards(NPC.transform.position, opponent.transform.position, speed * Time.deltaTime);
-        NPC.GetComponent<NPCAI>().GetAgent().SetDestination(opponent.transform.position);
+        PrefabNPC.GetComponent<NPCAI>().GetAgent().SetDestination(Opponent.transform.position);
         // if(opponent.transform.position<=NPC.)
     }
 

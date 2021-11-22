@@ -9,6 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7635e94ec0ba3164683758822c1175c9, type: 3}
-  m_Name: Potion_Base
+  m_Script: {fileID: 11500000, guid: 06118f974a7197b42b8bd09f055ad325, type: 3}
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
+  damage: 0
+  attackSpeed: 0
+  velocity: 5
+  hp: 0
+  mana: 0
+  hpMax: 0
+  manaMax: 0
+  isAlive: 0

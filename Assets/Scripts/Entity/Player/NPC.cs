@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class NPC : Entity
 {
-    private float viewAngle;
-    public Vector3 posCurrentWP;
-    public bool IsMoving { get; set; }
-    public bool IsAttacking { get; set; }
-    public int attackRadius = 100;
+
+    //private int attackRadius = 100;
 
     private AnimationNPCController animController;
 
     private GameObject spriteObject;
 
+    public Vector3 PosCurrentWP { get; set; }
+    public float AttackRadius { get; set; }
+
     void Start()
     {
-        IsMoving = true;
-        IsAttacking = false;
+        Stats.IsMoving = true;
+        Stats.IsAttacking = false;
 
         spriteObject = transform.GetChild(0).gameObject;
         animController = new AnimationNPCController(this, spriteObject.GetComponent<Animator>(), GetComponent<Animator>());

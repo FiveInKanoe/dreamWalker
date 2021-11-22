@@ -4,39 +4,38 @@ using UnityEngine;
 
 public class Patrol : NPCBaseFSM
 {
-    public GameObject[] waypoints { get; set; }
-    public int currentWP { get; set; }
-    public Vector3 nowGoal { get; set; }
-    private float speed = 1.5f;
+    public List<GameObject> Waypoints { get; set; }
+    public int CurrentWP { get; set; }
+    public Vector3 NowGoal { get; set; }
 
     void Awake()
     {
-        waypoints = GameObject.FindGameObjectsWithTag("waypoint");
+        Waypoints = new List<GameObject>();
     }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        currentWP = 0;
+        CurrentWP = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Проверка наличия точек
-        if (waypoints.Length == 0)
+        if (Waypoints.Count == 0)
         {
             return;
         }
         //Преверка расстояния между точкой НПС
-        if (Vector3.Distance(waypoints[currentWP].transform.position, NPC.transform.position) < 1.0f)
+        if (Vector3.Distance(Waypoints[CurrentWP].transform.position, PrefabNPC.transform.position) < 1.0f)
         {
-            currentWP++;
+            CurrentWP++;
             //Сброс счетчика
-            if (currentWP >= waypoints.Length)
+            if (CurrentWP >= Waypoints.Count)
             {
-                currentWP = 0;
+                CurrentWP = 0;
             }
         }
         // var direction = waypoints[currentWP].transform.position - NPC.transform.position;
@@ -52,8 +51,8 @@ public class Patrol : NPCBaseFSM
 
         // Debug.Log(this.speed);
         // Debug.Log(Transform.);
-        NPC.GetComponent<NPCAI>().GetAgent().SetDestination(waypoints[currentWP].transform.position);
-        nowGoal = waypoints[currentWP].transform.position;
+        PrefabNPC.GetComponent<NPCAI>().GetAgent().SetDestination(Waypoints[CurrentWP].transform.position);
+        NowGoal = Waypoints[CurrentWP].transform.position;
         // float angle = Mathf.Atan2(NPC.GetComponent<NPCAI>().GetAgent().transform.position, waypoints[currentWP].transform.position) * Mathf.Rad2Deg;
         // Debug.Log("DESTINATION: " + waypoints[currentWP].transform.position);
         // Debug.Log("angle: " + NPC.);

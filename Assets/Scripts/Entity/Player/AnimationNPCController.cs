@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Сделать МоноБехом
 public class AnimationNPCController
 {
-    enum State
-    {
-        NORTH = 1, EAST = 2, SOUTH = 3, WEST = 4
-    }
     // [SerializeField] Animator
     private NPC npc;
     private Animator animator;
@@ -24,18 +21,11 @@ public class AnimationNPCController
     public void Animate()
     {
         //REWRITE IT
-        animator.SetBool("isAttacking", npc.IsAttacking);
-        animator.SetBool("isMoving", npc.IsMoving);
+        animator.SetBool("isAttacking", npc.Stats.IsAttacking);
+        animator.SetBool("isMoving", npc.Stats.IsMoving);
         // animator.SetInteger("direction", (int)State.WEST);
-        //attack
-        if (NPCFSM.GetFloat("distance") <= 1)
-        {
-            npc.IsAttacking = true;
-        }
-        else
-        {
-            npc.IsAttacking = false;
-        }
+        //attack (1 поменять на атакующую дистанцию)
+        npc.Stats.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
 
         //следование
         // Debug.Log(NPCFSM.GetFloat("distance"));
@@ -43,8 +33,8 @@ public class AnimationNPCController
         // animator.SetInteger("direction", (int)State.EAST);
         if (NPCFSM.GetBehaviour<Patrol>() != null)
         {
-            float deltaX = NPCFSM.GetBehaviour<Patrol>().nowGoal.x - npc.transform.position.x;
-            float deltaY = NPCFSM.GetBehaviour<Patrol>().nowGoal.y - npc.transform.position.y;
+            float deltaX = NPCFSM.GetBehaviour<Patrol>().NowGoal.x - npc.transform.position.x;
+            float deltaY = NPCFSM.GetBehaviour<Patrol>().NowGoal.y - npc.transform.position.y;
             float _angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
             if (_angle < 0)
             {
@@ -58,23 +48,23 @@ public class AnimationNPCController
             {
                 Debug.Log("EAST");
                 // animator.SetInteger("direction", (int)State.EAST);
-                animator.SetInteger("direction", (int)State.WEST);
+                animator.SetInteger("direction", (int)Direction.WEST);
             }
             if (_angle >= 45 && _angle <= 135)
             {
                 Debug.Log("NORTH");
-                animator.SetInteger("direction", (int)State.NORTH);
+                animator.SetInteger("direction", (int)Direction.NORTH);
             }
             if (_angle > 135 && _angle < 225)
             {
                 Debug.Log("WEST");
                 // animator.SetInteger("direction", (int)State.WEST);
-                animator.SetInteger("direction", (int)State.EAST);
+                animator.SetInteger("direction", (int)Direction.EAST);
             }
             if (_angle >= 225 && _angle <= 315)
             {
                 Debug.Log("SOUTH");
-                animator.SetInteger("direction", (int)State.SOUTH);
+                animator.SetInteger("direction", (int)Direction.SOUTH);
             }
         }
 
