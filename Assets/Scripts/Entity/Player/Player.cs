@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [SerializeField] private string playerClass;
+    [SerializeField] private PlayerClass playerClass;
     [SerializeField] private List<Skills> skillSet = new List<Skills>();
     [SerializeField] private Inventory inventory;
 
@@ -14,14 +14,13 @@ public class Player : Entity
 
     void Start()
     {
-        playerClass = playerClass.ToLower();
         skillContainer = new GameObject("Skill Container");
         switch (playerClass)
         {
-            case "ranger":
+            case PlayerClass.RANGER:
                 classControl = new RangerControl();
                 break;
-            case "mage":
+            case PlayerClass.MAGE:
                 classControl = new MageControl();
                 break;
             default:

@@ -86,15 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69e7a3735a0f5b45ba77f9f913c8b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  attackSpeed: 0
-  speed: 3
   hp: 0
   mana: 0
-  hpMax: 0
-  manaMax: 0
-  isAlive: 1
-  playerClass: 
+  stats: {fileID: 11400000, guid: 80af76271a3d48643b5b9a1d4aacf0ce, type: 2}
+  playerClass: 0
   skillSet:
   - {fileID: 11400000, guid: 70c91006981ddd54f80cc579a3432142, type: 2}
   - {fileID: 11400000, guid: 054e47ada4657f54587dd6406d7e9a68, type: 2}

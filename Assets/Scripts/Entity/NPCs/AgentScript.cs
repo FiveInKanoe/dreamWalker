@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 public class AgentScript : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [SerializeField] private Transform target;
+
     private NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
-        // target = GameObject.FindGameObjectWithTag("Player").transform;
+        //target = GameObject.FindGameObjectWithTag("Player").transform;
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;

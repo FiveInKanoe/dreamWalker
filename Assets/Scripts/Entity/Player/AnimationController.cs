@@ -17,8 +17,8 @@ public class AnimationController : MonoBehaviour
     {
         float angle = transform.rotation.eulerAngles.z;
 
-        animator.SetBool("isAttacking", entity.IsAttacking);
-        animator.SetBool("isMoving", entity.IsMoving);
+        animator.SetBool("isAttacking", entity.Stats.IsAttacking);
+        animator.SetBool("isMoving", entity.Stats.IsMoving);
 
         if (angle > 315 && angle <= 360 || angle >= 0 && angle < 45)
         {

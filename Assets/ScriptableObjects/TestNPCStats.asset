@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4facfbc3fae495046a1951e82ec4d314, type: 3}
-  m_Name: Mana_Potion
+  m_Script: {fileID: 11500000, guid: 06118f974a7197b42b8bd09f055ad325, type: 3}
+  m_Name: TestNPCStats
   m_EditorClassIdentifier: 
-  id: 0
-  sprite: {fileID: 21300000, guid: 42cae2ab83f626149885f037c7532b79, type: 3}
-  description: 
+  damage: 0
+  attackSpeed: 0
+  velocity: 0
+  hpMax: 0
+  manaMax: 0

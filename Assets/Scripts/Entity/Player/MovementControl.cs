@@ -16,7 +16,7 @@ public class MovementControl : MonoBehaviour
     private void FixedUpdate()
     {
         //Input.GetAxis("Horizontal") == 1     Input.GetAxisRaw("Vertical") == 1  
-        float playersSpeed = entity.Speed;
+        float playersSpeed = entity.Stats.Velocity;
         Vector2 mousePos = Input.mousePosition;
         Vector2 playersPos = Camera.main.WorldToScreenPoint(entityBody.position);
         float angle = Mathf.Atan2(mousePos.y - playersPos.y, mousePos.x - playersPos.x) * Mathf.Rad2Deg;
@@ -66,6 +66,6 @@ public class MovementControl : MonoBehaviour
             entityBody.velocity = new Vector2(0, 0);
             isMoving = false;
         }
-        entity.IsMoving = isMoving;
+        entity.Stats.IsMoving = isMoving;
     }
 }

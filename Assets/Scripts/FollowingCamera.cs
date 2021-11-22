@@ -15,7 +15,7 @@ public class FollowingCamera : MonoBehaviour
                 (
                 transform.position,
                 target.transform.position,
-                target.Speed * Time.deltaTime
+                target.Stats.Velocity * Time.deltaTime
                 );
             transform.position = new Vector3(lerpPos.x, lerpPos.y, -2);
         }    

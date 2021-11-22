@@ -9,11 +9,11 @@ public class WarriorControl : IClassControl
         //À Ã
         if (Input.GetMouseButton(0))
         {
-            player.IsAttacking = true;
+            player.Stats.IsAttacking = true;
         }
         else
         {
-            player.IsAttacking = false;
+            player.Stats.IsAttacking = false;
         }
     }
 }

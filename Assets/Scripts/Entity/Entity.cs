@@ -2,39 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] private float damage;
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private float speed;
     [SerializeField] private float hp;
     [SerializeField] private float mana;
-    [SerializeField] private float hpMax;
-    [SerializeField] private float manaMax;
-    [SerializeField] private bool isAlive;
+    [SerializeField] private EntityStats stats;
 
-    public float Damage { get => damage; set => damage = value; }
-    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-    public float Speed { get => speed; set => speed = value; }
     public float Hp { get => hp; set => hp = value; }
     public float Mana { get => mana; set => mana = value; }
-    public float HpMax { get => hpMax; set => hpMax = value; }
-    public float ManaMax { get => manaMax; set => manaMax = value; }
-    public bool IsAlive { get => isAlive; set => isAlive = value; }
-    public int TestProp
-    {
-        get { return 0; }
-        set { }
-    }
-    public bool IsMoving { get; set; }
-    public bool IsAttacking { get; set; }
+    public EntityStats Stats { get => stats; }
 
-
-    void Start()
+    private void Start()
     {
-        IsAlive = true;
-        IsMoving = false;
-        IsAttacking = false;
+        stats.IsAlive = true;
+        stats.IsMoving = false;
+        stats.IsAttacking = false;
     }
 
 }
