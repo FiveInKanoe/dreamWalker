@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Сделать МоноБехом
-public class AnimationNPCController
+public class AnimationNPCController : MonoBehaviour
 {
     // [SerializeField] Animator
-    private NPC npc;
+    [SerializeField] private NPC npc;
+
     private Animator animator;
     private Animator NPCFSM;
 
-    public AnimationNPCController(NPC _npc, Animator animator, Animator _NPCFSM)
+    private void Start()
     {
-        this.npc = _npc;
-        this.animator = animator;
-        this.NPCFSM = _NPCFSM;
+        animator = npc.View.SpriteAnimator;
+        NPCFSM = npc.View.StateAnimator;
     }
 
-    public void Animate()
+
+    private void FixedUpdate()
     {
         //REWRITE IT
         animator.SetBool("isAttacking", npc.Stats.IsAttacking);
@@ -26,12 +27,13 @@ public class AnimationNPCController
         //attack (1 поменять на атакующую дистанцию)
         npc.Stats.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
 
-        Vector3 _driectionVecotr3 = npc.GetComponent<NPCAI>().Agent.velocity;
+        Vector3 _driectionVecotr3 = npc.View.NPCsAgent.velocity;
         // Direction _directionCalculated;
         if (Mathf.Abs(_driectionVecotr3.x) > Mathf.Abs(_driectionVecotr3.y))
         {
             float deltaX = NPCFSM.GetBehaviour<Patrol>().nowGoal.x - npc.transform.position.x;
             float deltaY = NPCFSM.GetBehaviour<Patrol>().nowGoal.y - npc.transform.position.y;
+
             float _angle = Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg;
             if (_angle < 0)
             {
@@ -69,6 +71,6 @@ public class AnimationNPCController
             }
         }
         // animator.SetInteger("direction", (int)_directionCalculated);
-
     }
+
 }

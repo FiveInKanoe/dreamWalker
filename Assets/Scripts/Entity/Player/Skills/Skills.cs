@@ -15,7 +15,7 @@ public abstract class Skills : ScriptableObject
     protected GameObject SkillContainer { get; set; }
     protected float NextUsageTime { get; set; }
 
-    public abstract void Init(GameObject gameObject, GameObject skillContainer);
+    public abstract void Initialize(Player player, GameObject skillContainer);
 
     public abstract void Usage();
 }

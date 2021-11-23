@@ -14,23 +14,24 @@ public class Rage : Skills
 
 
     private float endOfEffectTime;
-    private Entity entity;
+    private Player player;
 
 
-    private Transform sprite;
+    private Transform spriteTransform;
     private SpriteRenderer spriteRenderer;
 
-    public override void Init(GameObject gameObject, GameObject skillContainer)
+    public override void Initialize(Player player, GameObject skillContainer)
     {
         NextUsageTime = 0;
-        this.SkillContainer = skillContainer;
+        SkillContainer = skillContainer;
         endOfEffectTime = 0;
         growthCoef = 1.2f;
-        entity = gameObject.GetComponent<Entity>();
-        sprite = gameObject.transform.GetChild(0);
-        if (sprite != null)
+        this.player = player;
+        spriteTransform = player.View.SpriteAnimator.gameObject.transform;
+
+        if (spriteTransform != null)
         {
-            spriteRenderer = sprite.GetComponent<SpriteRenderer>();
+            spriteRenderer = player.View.SpriteRenderer;
         }
     }
 
@@ -51,15 +52,15 @@ public class Rage : Skills
 
     private void Perform()
     {
-        entity.Stats.Damage += bonusDamage;
-        entity.Stats.AttackSpeed += bonusAttackSpeed;
-        entity.Stats.Velocity += bonusVelocity;
+        player.Stats.Damage += bonusDamage;
+        player.Stats.AttackSpeed += bonusAttackSpeed;
+        player.Stats.Velocity += bonusVelocity;
         if (spriteRenderer != null)
         {
-            sprite.localScale = new Vector2
+            spriteTransform.localScale = new Vector2
                 (
-                sprite.localScale.x * growthCoef,
-                sprite.localScale.y * growthCoef
+                spriteTransform.localScale.x * growthCoef,
+                spriteTransform.localScale.y * growthCoef
                 );
             spriteRenderer.color = rageColor;
         }
@@ -67,15 +68,15 @@ public class Rage : Skills
 
     private void ToDefault()
     {
-        entity.Stats.Damage -= bonusDamage;
-        entity.Stats.AttackSpeed -= bonusAttackSpeed;
-        entity.Stats.Velocity -= bonusVelocity;
+        player.Stats.Damage -= bonusDamage;
+        player.Stats.AttackSpeed -= bonusAttackSpeed;
+        player.Stats.Velocity -= bonusVelocity;
         if (spriteRenderer != null)
         {
-            sprite.localScale = new Vector2
+            spriteTransform.localScale = new Vector2
                 (
-                sprite.localScale.x / growthCoef,
-                sprite.localScale.y / growthCoef
+                spriteTransform.localScale.x / growthCoef,
+                spriteTransform.localScale.y / growthCoef
                 );
             spriteRenderer.color = Color.white;
         }

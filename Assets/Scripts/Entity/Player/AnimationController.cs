@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private Entity entity;
+    [SerializeField] private Player player;
+
     private Animator animator;
 
     void Start()
     {
-        entity = GetComponent<Entity>();
-        animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        animator = player.View.SpriteAnimator;
     }
 
     void FixedUpdate()
     {
         float angle = transform.rotation.eulerAngles.z;
 
-        animator.SetBool("isAttacking", entity.Stats.IsAttacking);
-        animator.SetBool("isMoving", entity.Stats.IsMoving);
+        animator.SetBool("isAttacking", player.Stats.IsAttacking);
+        animator.SetBool("isMoving", player.Stats.IsMoving);
 
         if (angle > 315 && angle <= 360 || angle >= 0 && angle < 45)
         {

@@ -6,27 +6,27 @@ using UnityEngine.AI;
 public class NPC : Entity
 {
 
+    [SerializeField] private NPCView view;
+
+    [SerializeField] private GameObject target;
+
     //private int attackRadius = 100;
 
-    private AnimationNPCController animController;
-
-    private GameObject spriteObject;
-
+    public NPCView View { get => view; }
     public Vector3 PosCurrentWP { get; set; }
     public float AttackRadius { get; set; }
+
+    public GameObject Target { get => target; }
 
     void Start()
     {
         Stats.IsMoving = true;
         Stats.IsAttacking = false;
 
-        spriteObject = transform.GetChild(0).gameObject;
-        animController = new AnimationNPCController(this, spriteObject.GetComponent<Animator>(), GetComponent<Animator>());
     }
 
     void FixedUpdate()
     {
-        animController.Animate();
         // Debug.Log("Contains" + navMesh.GetComponent<NavMeshSurface2d>().navMeshData.sourceBounds.Contains(new Vector3(transform.position.x, transform.position.y, navMesh.GetComponent<NavMeshSurface2d>().navMeshData.sourceBounds.extents.z)));
         // Debug.Log("Contains" + navMesh.GetComponent<NavMeshSurface2d>().navMeshData.sourceBounds.Contains(navMesh.GetComponent<NavMeshSurface2d>().navMeshData.sourceBounds.min));
         // Debug.Log("Contains min" + navMesh.GetComponent<NavMeshSurface2d>().navMeshData.sourceBounds.min);

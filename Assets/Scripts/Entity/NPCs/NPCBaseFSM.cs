@@ -7,20 +7,21 @@ public abstract class NPCBaseFSM : StateMachineBehaviour
 {
     [SerializeField] private GameObject prefabNPC;
     [SerializeField] private GameObject opponent;
+    private NPC npc;
 
     protected GameObject PrefabNPC { get => prefabNPC; set => prefabNPC = value; }
     protected GameObject Opponent { get => opponent; set => opponent = value; }
-
-    //���������� PrefabNPC � OnEnable ������ � ����������� ������
-
+    protected NPC NPCinf { get => npc; }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         prefabNPC = animator.gameObject;
-        opponent = prefabNPC.GetComponent<NPCAI>().Player;
 
-        prefabNPC.GetComponent<NPCAI>().Agent.updateRotation = false;
-        prefabNPC.GetComponent<NPCAI>().Agent.updateUpAxis = false;
+        npc = animator.gameObject.GetComponent<NPC>();
+        opponent = prefabNPC.GetComponent<NPCAI>().Target;
+
+        npc.View.NPCsAgent.updateRotation = false;
+        npc.View.NPCsAgent.updateUpAxis = false;
     }
 
 }

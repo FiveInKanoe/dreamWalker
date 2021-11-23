@@ -174,13 +174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-=======
     - target: {fileID: 4379268891873643814, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: itemInfo
       value: 
       objectReference: {fileID: 11400000, guid: 9a7495b4dcf57d8429f413a257d71211, type: 2}
->>>>>>> Vitalii
     - target: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: m_Name
       value: item_in_world (3)
@@ -278,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f7d770b94f0a41913a34303345f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clustGen: {fileID: 11400000, guid: 7827d93fa4122e74c8a8b8415f14cf42, type: 2}
+  clustGen: {fileID: 11400000, guid: d2bc671aef5c9944f82a0c694bf55bd2, type: 2}
   structures:
   - {fileID: 4453474518204534992, guid: 8402ba72ffdcadb4facb43b4a7685d19, type: 3}
   - {fileID: 3258812674013115387, guid: ffaa8c678142af6419194b2983613e23, type: 3}
@@ -686,11 +683,7 @@ PrefabInstance:
     - target: {fileID: 4379268891873643814, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: itemInfo
       value: 
-<<<<<<< HEAD
-      objectReference: {fileID: 11400000, guid: b2f5a028df979fd4e8c2b70da734ffbb, type: 2}
-=======
       objectReference: {fileID: 0}
->>>>>>> Vitalii
     - target: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: m_Name
       value: item_in_world (1)
@@ -812,11 +805,7 @@ PrefabInstance:
     - target: {fileID: 4379268891873643814, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: itemInfo
       value: 
-<<<<<<< HEAD
-      objectReference: {fileID: 11400000, guid: b2f5a028df979fd4e8c2b70da734ffbb, type: 2}
-=======
       objectReference: {fileID: 0}
->>>>>>> Vitalii
     - target: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
       propertyPath: m_Name
       value: item_in_world (4)

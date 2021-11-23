@@ -8,8 +8,12 @@ public class Player : Entity
     [SerializeField] private List<Skills> skillSet = new List<Skills>();
     [SerializeField] private Inventory inventory;
 
+    [SerializeField] private PlayerView view;
+
     private IClassControl classControl;
     private GameObject skillContainer;
+
+    public PlayerView View { get => view; }
 
 
     void Start()
@@ -30,7 +34,7 @@ public class Player : Entity
 
         foreach (Skills skill in skillSet)
         {
-            skill.Init(gameObject, skillContainer);
+            skill.Initialize(this, skillContainer);
         }
 
     }

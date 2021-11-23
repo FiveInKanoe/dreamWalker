@@ -5,24 +5,28 @@ using UnityEngine.AI;
 
 public class NPCAI : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private NPC npc;
+
+    private GameObject target;
 
     private Animator animator;
     private NavMeshAgent agent;
 
-    public GameObject Player { get => player; }
+    public GameObject Target { get => target; }
     public NavMeshAgent Agent { get => agent; }
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        animator = npc.View.StateAnimator;
+        agent = npc.View.NPCsAgent;
+        target = npc.Target;
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
     void Update()
     {
-        animator.SetFloat("distance", Vector3.Distance(transform.position, player.transform.position));
-        Debug.Log(Vector3.Distance(transform.position, player.transform.position));
+        animator.SetFloat("distance", Vector3.Distance(transform.position, target.transform.position));
+        Debug.Log(Vector3.Distance(transform.position, target.transform.position));
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class AgentScript : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private NPC npc;
 
     private NavMeshAgent agent;
 
@@ -13,7 +13,7 @@ public class AgentScript : MonoBehaviour
     {
         //target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        agent = GetComponent<NavMeshAgent>();
+        agent = npc.View.NPCsAgent;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -21,6 +21,6 @@ public class AgentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(npc.Target.transform.position);
     }
 }

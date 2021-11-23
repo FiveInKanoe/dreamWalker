@@ -171,10 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186be2723c8642641a1aa0669cbd53a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC: {fileID: 0}
+  prefabNPC: {fileID: 0}
   opponent: {fileID: 0}
-  speed: 0
-  accuracy: 1
 --- !u!114 &7908630322274216828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,7 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7515d98881c1ad14f963daa972d600bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NPC: {fileID: 0}
+  prefabNPC: {fileID: 0}
   opponent: {fileID: 0}
-  speed: 3
-  accuracy: 1

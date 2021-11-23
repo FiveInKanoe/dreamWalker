@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f9b68f2c6cfe7c499112829c0d5c109, type: 3}
+  m_Name: ClusterGenerator
+  m_EditorClassIdentifier: 
+  roomsCount: 512
+  createHoles: 0
+  probability: 0
+  StartRoom: {fileID: 6400752516767001075, guid: e1c50b350775d4d40aedc4a5cac16e7c, type: 3}
+  ExitRoom: {fileID: 2339138086880734039, guid: 257e669aab2fa62429a6523d96481b43, type: 3}
+  roomsPool:
+  - {fileID: 4152121378240448674, guid: 79e9c10dd2cdc024cb4fbb81de762727, type: 3}
+  - {fileID: 7879909700340212057, guid: 321caca769fa3da439922f47b95e2c77, type: 3}
+  - {fileID: 4152121378240448674, guid: 79e9c10dd2cdc024cb4fbb81de762727, type: 3}
+  - {fileID: 4152121378240448674, guid: 79e9c10dd2cdc024cb4fbb81de762727, type: 3}
+  - {fileID: 1239688587434794662, guid: eb61bf1c272d8e54db3f6a31dd14147b, type: 3}
+  - {fileID: 7762099485124155708, guid: 0ea202c75a75fe448bbc5e211a0456e6, type: 3}
+  - {fileID: 4958741726057022126, guid: 27865f098f581614d9cfd9b2a02b952c, type: 3}
+  - {fileID: 6062010436587688771, guid: b9a82c573d2b7ea46b413035217bdfa5, type: 3}

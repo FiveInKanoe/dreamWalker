@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementControl : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
-    private Entity entity;
+    [SerializeField] private Player player;
+
     private Rigidbody2D entityBody;
 
     void Start()
     {
-        entity = GetComponent<Entity>();
-        entityBody = GetComponent<Rigidbody2D>();
+        entityBody = player.View.PlayersBody;
     }
 
     private void FixedUpdate()
     {
         //Input.GetAxis("Horizontal") == 1     Input.GetAxisRaw("Vertical") == 1  
-        float playersSpeed = entity.Stats.Velocity;
+        float playersSpeed = player.Stats.Velocity;
         Vector2 mousePos = Input.mousePosition;
         Vector2 playersPos = Camera.main.WorldToScreenPoint(entityBody.position);
         float angle = Mathf.Atan2(mousePos.y - playersPos.y, mousePos.x - playersPos.x) * Mathf.Rad2Deg;
@@ -66,6 +66,6 @@ public class MovementControl : MonoBehaviour
             entityBody.velocity = new Vector2(0, 0);
             isMoving = false;
         }
-        entity.Stats.IsMoving = isMoving;
+        player.Stats.IsMoving = isMoving;
     }
 }

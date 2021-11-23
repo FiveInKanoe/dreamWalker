@@ -13,19 +13,19 @@ public class Blink : Skills
     private GameObject blinkCont;
     private GameObject marker;
 
-    private Entity entity;
+    private Player player;
 
     private bool isBlinkPerformed;
     private bool isKeyPressed;
 
 
-    public override void Init(GameObject gameObject, GameObject skillContainer)
+    public override void Initialize(Player player, GameObject skillContainer)
     {
         NextUsageTime = 0;
-        this.SkillContainer = skillContainer;
+        SkillContainer = skillContainer;
         isBlinkPerformed = false;
         isKeyPressed = false;
-        entity = gameObject.GetComponent<Entity>();
+        this.player = player;
         blinkCont = new GameObject("Blink");
         blinkCont.transform.SetParent(this.SkillContainer.transform);
     }
@@ -55,7 +55,7 @@ public class Blink : Skills
             InitMarker();
         }
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 entityPosition = entity.transform.position;
+        Vector2 entityPosition = player.transform.position;
 
         float fullDistance = Vector2.Distance(entityPosition, mousePosition);
 
@@ -66,7 +66,7 @@ public class Blink : Skills
                 (
                 Mathf.Lerp(entityPosition.x, mousePosition.x, distanceRatio),
                 Mathf.Lerp(entityPosition.y, mousePosition.y, distanceRatio),
-                entity.transform.position.z
+                player.transform.position.z
                 );
         }
         else
@@ -75,12 +75,12 @@ public class Blink : Skills
                 (
                 mousePosition.x,
                 mousePosition.y,
-                entity.transform.position.z
+                player.transform.position.z
                 );
         }
         if (Input.GetMouseButton(0))
         {
-            entity.transform.position = marker.transform.position;
+            player.transform.position = marker.transform.position;
             isBlinkPerformed = true;
             Destroy(marker);
             marker = null;

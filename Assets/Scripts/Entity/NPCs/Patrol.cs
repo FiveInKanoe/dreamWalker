@@ -6,17 +6,16 @@ using UnityEngine.AI;
 // using UnityEngine.Scripting.APIUpdating;
 public class Patrol : NPCBaseFSM
 {
-    [SerializeField] Vector2 to;
+    private bool sleepFlag;
+    private float sleepTime;
+    private NavMeshAgent agent;
+    private NavMeshPath navMeshPath;
+    private float radisWaypoint;
+    private int countWaypoint;
+
     public List<Vector3> waypoints { get; set; }
     public int currentWP { get; set; }
     public Vector3 nowGoal { get; set; }
-    private bool sleepFlag;
-    private float sleepTime;
-    private float speed = 1.5f;
-    private NavMeshAgent agent;
-    public NavMeshPath navMeshPath;
-    private float radisWaypoint;
-    private int countWaypoint;
 
     // void Awake()
     // {
@@ -27,6 +26,7 @@ public class Patrol : NPCBaseFSM
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+
         sleepFlag = true;
         currentWP = 0;
         sleepTime = 0;
@@ -36,9 +36,12 @@ public class Patrol : NPCBaseFSM
 
         waypoints = new List<Vector3>();
         waypoints.Add(PrefabNPC.transform.position);
+
         navMeshPath = new NavMeshPath();
-        PrefabNPC.GetComponent<NPCAI>().Agent.acceleration = 60;
-        agent = PrefabNPC.GetComponent<NPCAI>().Agent;
+        NPCinf.View.NPCsAgent.acceleration = 60;
+
+        agent = NPCinf.View.NPCsAgent;
+
         GenerateWayPoints();
     }
 
@@ -68,7 +71,7 @@ public class Patrol : NPCBaseFSM
                     }
                 }
             }
-            PrefabNPC.GetComponent<NPCAI>().Agent.SetDestination(waypoints[currentWP]);
+            NPCinf.View.NPCsAgent.SetDestination(waypoints[currentWP]);
             nowGoal = waypoints[currentWP];
         }
     }
