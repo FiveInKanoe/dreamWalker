@@ -8,7 +8,7 @@ public abstract class ClassControl : ScriptableObject
     public PlayerClass ClassType { get; protected set; }
     protected Player Player { get; private set; }
 
-    public void Initialize(Player player)
+    public virtual void Initialize(Player player)
     {
         Player = player;
     }

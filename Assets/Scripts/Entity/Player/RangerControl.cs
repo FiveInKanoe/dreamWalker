@@ -20,12 +20,14 @@ public class RangerControl : ClassControl
         endOfDelay = 0;
     }
 
+    public override void Initialize(Player player)
+    {
+        base.Initialize(player);
+        ammoContainer = new GameObject("Players Ammo Container");
+    }
+
     public override void Control()
     {
-        if (ammoContainer == null)
-        {
-            ammoContainer = new GameObject("Players Ammo Container");
-        }
         //ËÊÌ
         if (Input.GetMouseButton(0) && Time.time > endOfDelay)
         {
