@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorControl : IClassControl
+[CreateAssetMenu(fileName = "WarriorClass", menuName = "Player Classes/Warrior Class")]
+public class WarriorControl : ClassControl
 {
-    public void ControlStrategy(Player player)
+
+    public override void Control()
     {
         //À Ã
         if (Input.GetMouseButton(0))
         {
-            player.Stats.IsAttacking = true;
+            Player.Stats.IsAttacking = true;
         }
         else
         {
-            player.Stats.IsAttacking = false;
+            Player.Stats.IsAttacking = false;
         }
     }
 }

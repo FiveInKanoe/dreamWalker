@@ -8,7 +8,7 @@ public class FlyingSword : Skills
     [SerializeField] private GameObject swordAmmo;
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;
-    [SerializeField] private float swordSpeed;
+    [SerializeField] private float swordVelocity;
     [SerializeField] private int maxSwordsCount;
 
     private GameObject flyingSwordCont;
@@ -45,8 +45,8 @@ public class FlyingSword : Skills
 
             currentSword.GetComponent<Rigidbody2D>().velocity = new Vector2
                 (
-                Mathf.Cos(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed,
-                Mathf.Sin(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordSpeed
+                Mathf.Cos(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity,
+                Mathf.Sin(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity
                 );
             Destroy(currentSword, lifeTime);
         }

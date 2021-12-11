@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MageControl : IClassControl
+[CreateAssetMenu(fileName = "MageClass", menuName = "Player Classes/Mage Class")]
+public class MageControl : ClassControl
 {
-    public void ControlStrategy(Player player)
+    private void OnEnable()
+    {
+        ClassType = PlayerClass.MAGE;
+    }
+
+    public override void Control()
     {
         //À Ã
         if (Input.GetMouseButton(0))
         {
-            player.Stats.IsAttacking = true;
+            Player.Stats.IsAttacking = true;
         }
         else
         {
-            player.Stats.IsAttacking = false;
+            Player.Stats.IsAttacking = false;
         }
     }
 }

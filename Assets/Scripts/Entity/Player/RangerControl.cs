@@ -2,18 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangerControl : IClassControl
+[CreateAssetMenu(fileName = "RangerClass", menuName = "Player Classes/Ranger Class")]
+public class RangerControl : ClassControl
 {
-    public void ControlStrategy(Player player)
+    [SerializeField] private GameObject ammo;
+    [SerializeField] private float ammoLifeTime;
+    [SerializeField] private float ammoDelayTime;
+    [SerializeField] private float ammoVelocity;
+    private float endOfDelay;
+
+    private GameObject ammoContainer;
+
+    private void OnEnable()
     {
-        //ËÊÌ
-        if (Input.GetMouseButton(0))
+        ammoContainer = null;
+        ClassType = PlayerClass.RANGER;
+        endOfDelay = 0;
+    }
+
+    public override void Control()
+    {
+        if (ammoContainer == null)
         {
-            player.Stats.IsAttacking = true;
+            ammoContainer = new GameObject("Players Ammo Container");
+        }
+        //ËÊÌ
+        if (Input.GetMouseButton(0) && Time.time > endOfDelay)
+        {
+            PerformAttack();
+            Player.Stats.IsAttacking = true;
+            endOfDelay = Time.time + ammoDelayTime;
         }
         else
         {
-            player.Stats.IsAttacking = false;
+            Player.Stats.IsAttacking = false;
         }
     }
+
+    private void PerformAttack()
+    {
+        GameObject currentAmmo = Instantiate(ammo, ammoContainer.transform);
+
+        currentAmmo.transform.position = Player.transform.position;
+        currentAmmo.transform.rotation = Player.transform.rotation;
+
+        currentAmmo.GetComponent<Rigidbody2D>().velocity = new Vector2
+            (
+            Mathf.Cos(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * ammoVelocity,
+            Mathf.Sin(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * ammoVelocity
+            );
+        Destroy(currentAmmo, ammoLifeTime);
+    }
+
+    
 }

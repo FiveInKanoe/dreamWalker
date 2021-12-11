@@ -114,6 +114,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d19c569b576ba264fb4549bc64b98f78, type: 2}
   inventory: {fileID: 11400000, guid: 73932541a38348345949075542d60d19, type: 2}
   view: {fileID: 2882276362505882178}
+  classControlTypes:
+  - {fileID: 11400000, guid: 8b3c8bece0c51ce488f6fd5e384b75a5, type: 2}
+  - {fileID: 11400000, guid: 4b35dbb1378265e429ed6046f461ffc1, type: 2}
+  - {fileID: 11400000, guid: b02762a88eab1bc4d92eb16d6bdd8a29, type: 2}
 --- !u!114 &5802767966444424250
 MonoBehaviour:
   m_ObjectHideFlags: 0

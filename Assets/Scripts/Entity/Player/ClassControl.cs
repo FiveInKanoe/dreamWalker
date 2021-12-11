@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class ClassControl : ScriptableObject
+{
+
+    public PlayerClass ClassType { get; protected set; }
+    protected Player Player { get; private set; }
+
+    public void Initialize(Player player)
+    {
+        Player = player;
+    }
+
+    public abstract void Control();
+}

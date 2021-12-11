@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class Player : Entity
 {
@@ -10,7 +12,9 @@ public class Player : Entity
 
     [SerializeField] private PlayerView view;
 
-    private IClassControl classControl;
+    [SerializeField] private List<ClassControl> classControlTypes = new List<ClassControl>();
+
+    private ClassControl classControl;
     private GameObject skillContainer;
 
     public PlayerView View { get => view; }
@@ -19,19 +23,15 @@ public class Player : Entity
     void Start()
     {
         skillContainer = new GameObject("Skill Container");
-        switch (playerClass)
+        foreach (ClassControl control in classControlTypes)
         {
-            case PlayerClass.RANGER:
-                classControl = new RangerControl();
+            if (control.ClassType == playerClass)
+            {
+                classControl = control;
                 break;
-            case PlayerClass.MAGE:
-                classControl = new MageControl();
-                break;
-            default:
-                classControl = new WarriorControl();
-                break;
+            }    
         }
-
+        classControl.Initialize(this);
         foreach (Skills skill in skillSet)
         {
             skill.Initialize(this, skillContainer);
@@ -45,7 +45,7 @@ public class Player : Entity
         {
             skill.Usage();
         }
-        classControl.ControlStrategy(this);
+        classControl.Control();
     }
 
     private void LateUpdate()

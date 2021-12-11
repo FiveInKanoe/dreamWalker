@@ -20,6 +20,7 @@ public abstract class NPCBaseFSM : StateMachineBehaviour
         npc = animator.gameObject.GetComponent<NPC>();
         opponent = prefabNPC.GetComponent<NPCAI>().Target;
 
+
         npc.View.NPCsAgent.updateRotation = false;
         npc.View.NPCsAgent.updateUpAxis = false;
     }
