@@ -18,5 +18,5 @@ MonoBehaviour:
   swordAmmo: {fileID: 6765856595749167943, guid: a1d289b71cbb7554987025277b795871, type: 3}
   lifeTime: 5
   damage: 0
-  swordSpeed: 5
+  swordVelocity: 10
   maxSwordsCount: 3

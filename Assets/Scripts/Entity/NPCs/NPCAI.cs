@@ -27,6 +27,6 @@ public class NPCAI : MonoBehaviour
     void Update()
     {
         animator.SetFloat("distance", Vector3.Distance(transform.position, target.transform.position));
-        Debug.Log(Vector3.Distance(transform.position, target.transform.position));
+        //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
     }
 }

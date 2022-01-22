@@ -12,11 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06118f974a7197b42b8bd09f055ad325, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 15
   attackSpeed: 0
   velocity: 5
-  hp: 0
-  mana: 0
-  hpMax: 0
+  hpMax: 100
   manaMax: 0
-  isAlive: 0

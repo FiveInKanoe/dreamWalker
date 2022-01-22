@@ -17,7 +17,9 @@ public class Player : Entity
     private ClassControl classControl;
     private GameObject skillContainer;
 
+    public PlayerClass PlayerClass { get => playerClass; }
     public PlayerView View { get => view; }
+    public Inventory Inventory { get => inventory; }
 
 
     void Start()
@@ -46,22 +48,12 @@ public class Player : Entity
             skill.Usage();
         }
         classControl.Control();
+
     }
 
     private void LateUpdate()
     {
-        transform.GetChild(0).rotation = Quaternion.identity;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        Collectable collectableItem = collision.GetComponent<Collectable>();
-        if (collectableItem != null && collectableItem.ItemInfo != null)
-        {
-            inventory.AddItem(collectableItem.ItemInfo, 1);
-            collectableItem.ItemInfo.TargetEntity = this;
-        }
-        Destroy(collectableItem.gameObject);
+        view.SpriteRenderer.transform.rotation = Quaternion.identity;
     }
 
     void OnApplicationQuit()

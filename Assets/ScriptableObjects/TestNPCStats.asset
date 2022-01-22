@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   attackSpeed: 0
-  velocity: 0
-  hpMax: 0
+  velocity: 10
+  hpMax: 100
   manaMax: 0

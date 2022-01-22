@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4259969639136445647}
   - component: {fileID: 4259969639136445641}
+  - component: {fileID: 3321386830376232171}
   - component: {fileID: 4259969639136445650}
   - component: {fileID: 4259969639136445651}
   - component: {fileID: 111831348318310143}
@@ -17,6 +18,7 @@ GameObject:
   - component: {fileID: 4259969639136445644}
   - component: {fileID: 4259969639136445648}
   - component: {fileID: 4500468922249350026}
+  - component: {fileID: 3033844996163301484}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -58,6 +60,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &3321386830376232171
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259969639136445640}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &4259969639136445650
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -108,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a8cbe110c956844bc4468217dffe49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcsBody: {fileID: 3321386830376232171}
   npcsCollider: {fileID: 4259969639136445650}
   npcsAgent: {fileID: 4259969639136445651}
   spriteAnimator: {fileID: 4259969640770498240}
@@ -124,11 +148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe68c656023c43544b7064d81b9d9582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 100
   mana: 0
   stats: {fileID: 11400000, guid: 3a0aef326b878d24ebbd3ca33ad09441, type: 2}
+  isAlive: 1
   view: {fileID: 111831348318310143}
   target: {fileID: 5802767966444424244, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
+  itemPrefab: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
+  itemPool:
+  - {fileID: 11400000, guid: b2f5a028df979fd4e8c2b70da734ffbb, type: 2}
+  - {fileID: 11400000, guid: 9a7495b4dcf57d8429f413a257d71211, type: 2}
 --- !u!114 &4259969639136445644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +197,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 4259969639136445645}
+--- !u!114 &3033844996163301484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259969639136445640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3316065253f54e996fac03c176374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4259969640770498242
 GameObject:
   m_ObjectHideFlags: 0

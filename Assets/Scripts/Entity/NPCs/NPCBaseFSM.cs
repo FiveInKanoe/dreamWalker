@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public abstract class NPCBaseFSM : StateMachineBehaviour
 {
-    [SerializeField] private GameObject prefabNPC;
-    [SerializeField] private GameObject opponent;
+    private GameObject prefabNPC;
+    private GameObject opponent;
     private NPC npc;
 
     protected GameObject PrefabNPC { get => prefabNPC; set => prefabNPC = value; }
@@ -17,8 +17,8 @@ public abstract class NPCBaseFSM : StateMachineBehaviour
     {
         prefabNPC = animator.gameObject;
 
-        npc = animator.gameObject.GetComponent<NPC>();
-        opponent = prefabNPC.GetComponent<NPCAI>().Target;
+        npc = prefabNPC.GetComponent<NPC>();
+        opponent = npc.Target;
 
 
         npc.View.NPCsAgent.updateRotation = false;

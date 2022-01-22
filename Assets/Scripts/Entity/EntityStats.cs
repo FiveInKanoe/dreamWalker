@@ -15,9 +15,7 @@ public class EntityStats : ScriptableObject
     public float HpMax { get => hpMax; set => hpMax = value; }
     public float ManaMax { get => manaMax; set => manaMax = value; }
 
-    public bool IsAlive { get; set; }
-    public bool IsMoving { get; set; }
-    public bool IsAttacking { get; set; }
+    
 
 }
 

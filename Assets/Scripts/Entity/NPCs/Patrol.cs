@@ -38,7 +38,7 @@ public class Patrol : NPCBaseFSM
         waypoints.Add(PrefabNPC.transform.position);
 
         navMeshPath = new NavMeshPath();
-        NPCinf.View.NPCsAgent.acceleration = 60;
+        NPCinf.View.NPCsAgent.acceleration = NPCinf.Stats.Velocity;
 
         agent = NPCinf.View.NPCsAgent;
 

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5802767966013343011}
   - component: {fileID: 5802767966444424250}
   - component: {fileID: 5802767966444424245}
+  - component: {fileID: 5608368503482264656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -69,7 +70,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -104,9 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69e7a3735a0f5b45ba77f9f913c8b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 100
   mana: 0
   stats: {fileID: 11400000, guid: 80af76271a3d48643b5b9a1d4aacf0ce, type: 2}
+  isAlive: 1
   playerClass: 0
   skillSet:
   - {fileID: 11400000, guid: 70c91006981ddd54f80cc579a3432142, type: 2}
@@ -141,6 +143,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b94582dd0874ffe47865e745003f6f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5802767966013343011}
+--- !u!114 &5608368503482264656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802767966444424244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470cefd4a346bb54e85b4388049cac2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5802767966013343011}
@@ -288,7 +303,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

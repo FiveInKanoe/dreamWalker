@@ -66,6 +66,6 @@ public class MovementController : MonoBehaviour
             entityBody.velocity = new Vector2(0, 0);
             isMoving = false;
         }
-        player.Stats.IsMoving = isMoving;
+        player.IsMoving = isMoving;
     }
 }

@@ -21,11 +21,11 @@ public class AnimationNPCController : MonoBehaviour
     private void FixedUpdate()
     {
         //REWRITE IT
-        animator.SetBool("isAttacking", npc.Stats.IsAttacking);
-        animator.SetBool("isMoving", npc.Stats.IsMoving);
+        animator.SetBool("isAttacking", npc.IsAttacking);
+        animator.SetBool("isMoving", npc.IsMoving);
         // animator.SetInteger("direction", (int)State.WEST);
         //attack (1 поменять на атакующую дистанцию)
-        npc.Stats.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
+        npc.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
 
         Vector3 _driectionVecotr3 = npc.View.NPCsAgent.velocity;
         // Direction _directionCalculated;
@@ -40,18 +40,18 @@ public class AnimationNPCController : MonoBehaviour
                 _angle = Mathf.Abs(_angle) + 180;
             }
             // float _angle = (Mathf.Abs(Mathf.Atan2(deltaY, deltaX) * Mathf.Rad2Deg));
-            Debug.Log(_angle);
+            //Debug.Log(_angle);
             // if
-            Debug.Log("DIRECTION: " + animator.GetInteger("direction"));
+            //Debug.Log("DIRECTION: " + animator.GetInteger("direction"));
             if (_angle > 315 && _angle <= 360 || _angle >= 0 && _angle < 45)
             {
-                Debug.Log("EAST");
+                //Debug.Log("EAST");
                 // animator.SetInteger("direction", (int)State.EAST);
                 animator.SetInteger("direction", (int)Direction.WEST);
             }
             else
             {
-                Debug.Log("NORTH");
+                //Debug.Log("NORTH");
                 animator.SetInteger("direction", (int)Direction.NORTH);
             }
         }
@@ -60,13 +60,13 @@ public class AnimationNPCController : MonoBehaviour
             //Vertical
             if (_driectionVecotr3.y > 0)
             {
-                Debug.Log("WEST");
+                //Debug.Log("WEST");
                 // animator.SetInteger("direction", (int)State.WEST);
                 animator.SetInteger("direction", (int)Direction.EAST);
             }
             else
             {
-                Debug.Log("SOUTH");
+                //Debug.Log("SOUTH");
                 animator.SetInteger("direction", (int)Direction.SOUTH);
             }
         }

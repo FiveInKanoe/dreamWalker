@@ -20,6 +20,4 @@ public abstract class Item : ScriptableObject
     public int ID { get => id; private set => id = value; }
     public Sprite Sprite{ get => sprite; protected set => sprite = value;}
 
-    public Entity TargetEntity { get; set; }
-
 }

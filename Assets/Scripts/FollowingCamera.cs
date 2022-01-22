@@ -7,7 +7,7 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField] private Entity target;
 
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (target != null)
         {

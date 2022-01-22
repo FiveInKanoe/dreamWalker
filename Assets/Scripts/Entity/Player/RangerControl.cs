@@ -32,12 +32,12 @@ public class RangerControl : ClassControl
         if (Input.GetMouseButton(0) && Time.time > endOfDelay)
         {
             PerformAttack();
-            Player.Stats.IsAttacking = true;
+            Player.IsAttacking = true;
             endOfDelay = Time.time + ammoDelayTime;
         }
         else
         {
-            Player.Stats.IsAttacking = false;
+            Player.IsAttacking = false;
         }
     }
 
