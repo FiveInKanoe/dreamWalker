@@ -13,7 +13,6 @@ public class Blink : Skills
     private GameObject blinkCont;
     private GameObject marker;
 
-    private Player player;
 
     private bool isBlinkPerformed;
     private bool isKeyPressed;
@@ -25,7 +24,7 @@ public class Blink : Skills
         SkillContainer = skillContainer;
         isBlinkPerformed = false;
         isKeyPressed = false;
-        this.player = player;
+        this.Player = player;
         blinkCont = new GameObject("Blink");
         blinkCont.transform.SetParent(this.SkillContainer.transform);
     }
@@ -55,7 +54,7 @@ public class Blink : Skills
             InitMarker();
         }
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 entityPosition = player.transform.position;
+        Vector2 entityPosition = Player.transform.position;
 
         float fullDistance = Vector2.Distance(entityPosition, mousePosition);
 
@@ -66,7 +65,7 @@ public class Blink : Skills
                 (
                 Mathf.Lerp(entityPosition.x, mousePosition.x, distanceRatio),
                 Mathf.Lerp(entityPosition.y, mousePosition.y, distanceRatio),
-                player.transform.position.z
+                Player.transform.position.z
                 );
         }
         else
@@ -75,12 +74,12 @@ public class Blink : Skills
                 (
                 mousePosition.x,
                 mousePosition.y,
-                player.transform.position.z
+                Player.transform.position.z
                 );
         }
         if (Input.GetMouseButton(0))
         {
-            player.transform.position = marker.transform.position;
+            Player.transform.position = marker.transform.position;
             isBlinkPerformed = true;
             Destroy(marker);
             marker = null;

@@ -13,13 +13,12 @@ public class FlyingSword : Skills
 
     private GameObject flyingSwordCont;
 
-    private Player player;
 
     public override void Initialize(Player player, GameObject skillContainer)
     {
         NextUsageTime = 0;
         SkillContainer = skillContainer;
-        this.player = player;
+        this.Player = player;
         flyingSwordCont = new GameObject("FlyingSword");
         flyingSwordCont.transform.SetParent(this.SkillContainer.transform);
     }
@@ -40,13 +39,13 @@ public class FlyingSword : Skills
         {
             GameObject currentSword = Instantiate(swordAmmo, flyingSwordCont.transform);
 
-            currentSword.transform.position = player.transform.position;
-            currentSword.transform.rotation = player.transform.rotation;
+            currentSword.transform.position = Player.transform.position;
+            currentSword.transform.rotation = Player.transform.rotation;
 
             currentSword.GetComponent<Rigidbody2D>().velocity = new Vector2
                 (
-                Mathf.Cos(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity,
-                Mathf.Sin(player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity
+                Mathf.Cos(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity,
+                Mathf.Sin(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity
                 );
             Destroy(currentSword, lifeTime);
         }

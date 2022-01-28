@@ -16,7 +16,7 @@ public class NPC : Entity
     //private int attackRadius = 100;
 
     public NPCView View { get => view; }
-    public Vector3 PosCurrentWP { get; set; }
+
     public float AttackRadius { get; set; }
 
     public GameObject Target { get => target; }

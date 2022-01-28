@@ -278,8 +278,7 @@ MonoBehaviour:
   clustGen: {fileID: 11400000, guid: d2bc671aef5c9944f82a0c694bf55bd2, type: 2}
   structures:
   - {fileID: 4453474518204534992, guid: 8402ba72ffdcadb4facb43b4a7685d19, type: 3}
-  - {fileID: 3258812674013115387, guid: ffaa8c678142af6419194b2983613e23, type: 3}
-  probability: 0
+  probability: 0.29
 --- !u!156049354 &219926345
 Grid:
   m_ObjectHideFlags: 0
@@ -572,6 +571,10 @@ PrefabInstance:
       propertyPath: isAlive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5802767966013343011, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
+      propertyPath: playerClass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5802767966444424244, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: m_Name
       value: Player
@@ -582,11 +585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5802767966444424249, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.83475834
+      value: 7.59
       objectReference: {fileID: 0}
     - target: {fileID: 5802767966444424249, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.93230027
+      value: -1.05
       objectReference: {fileID: 0}
     - target: {fileID: 5802767966444424249, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: m_LocalPosition.z

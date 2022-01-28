@@ -14,7 +14,6 @@ public class Rage : Skills
 
 
     private float endOfEffectTime;
-    private Player player;
 
 
     private Transform spriteTransform;
@@ -26,7 +25,7 @@ public class Rage : Skills
         SkillContainer = skillContainer;
         endOfEffectTime = 0;
         growthCoef = 1.2f;
-        this.player = player;
+        this.Player = player;
         spriteTransform = player.View.SpriteAnimator.gameObject.transform;
 
         if (spriteTransform != null)
@@ -52,9 +51,9 @@ public class Rage : Skills
 
     private void Perform()
     {
-        player.Stats.Damage += bonusDamage;
-        player.Stats.AttackSpeed += bonusAttackSpeed;
-        player.Stats.Velocity += bonusVelocity;
+        Player.Stats.Damage += bonusDamage;
+        Player.Stats.AttackSpeed += bonusAttackSpeed;
+        Player.Stats.Velocity += bonusVelocity;
         if (spriteRenderer != null)
         {
             spriteTransform.localScale = new Vector2
@@ -68,9 +67,9 @@ public class Rage : Skills
 
     private void ToDefault()
     {
-        player.Stats.Damage -= bonusDamage;
-        player.Stats.AttackSpeed -= bonusAttackSpeed;
-        player.Stats.Velocity -= bonusVelocity;
+        Player.Stats.Damage -= bonusDamage;
+        Player.Stats.AttackSpeed -= bonusAttackSpeed;
+        Player.Stats.Velocity -= bonusVelocity;
         if (spriteRenderer != null)
         {
             spriteTransform.localScale = new Vector2

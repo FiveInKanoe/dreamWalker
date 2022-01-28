@@ -5,9 +5,9 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Equipment,
-    Potions,
-    Ammo
+    EQUIPMENT,
+    POTIONS,
+    AMMO
 }
 
 

@@ -17,10 +17,6 @@ public class Patrol : NPCBaseFSM
     public int currentWP { get; set; }
     public Vector3 nowGoal { get; set; }
 
-    // void Awake()
-    // {
-    //     // waypoints = GameObject.FindGameObjectsWithTag("waypoint");
-    // }
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -31,16 +27,17 @@ public class Patrol : NPCBaseFSM
         currentWP = 0;
         sleepTime = 0;
 
+        //Можно сделать [SerializedField]
         radisWaypoint = 7;
         countWaypoint = 5;
 
         waypoints = new List<Vector3>();
-        waypoints.Add(PrefabNPC.transform.position);
+        waypoints.Add(npc.gameObject.transform.position);
 
         navMeshPath = new NavMeshPath();
-        NPCinf.View.NPCsAgent.acceleration = NPCinf.Stats.Velocity;
+        npc.View.NPCsAgent.acceleration = npc.Stats.Velocity;
 
-        agent = NPCinf.View.NPCsAgent;
+        agent = npc.View.NPCsAgent;
 
         GenerateWayPoints();
     }
@@ -53,7 +50,7 @@ public class Patrol : NPCBaseFSM
         {
 
             //Преверка расстояния между точкой НПС
-            if (Vector2.Distance(waypoints[currentWP], PrefabNPC.transform.position) < 1.0f)
+            if (Vector2.Distance(waypoints[currentWP], npc.gameObject.transform.position) < 1.0f)
             {
                 if (sleepFlag)
                 {
@@ -71,15 +68,9 @@ public class Patrol : NPCBaseFSM
                     }
                 }
             }
-            NPCinf.View.NPCsAgent.SetDestination(waypoints[currentWP]);
+            npc.View.NPCsAgent.SetDestination(waypoints[currentWP]);
             nowGoal = waypoints[currentWP];
         }
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
     }
 
     private void GenerateWayPoints()
@@ -92,8 +83,9 @@ public class Patrol : NPCBaseFSM
                 break;
             }
             index++;
-            float _x = Random.Range(PrefabNPC.transform.position.x - radisWaypoint, PrefabNPC.transform.position.x + radisWaypoint);
-            float _y = Random.Range(PrefabNPC.transform.position.y - radisWaypoint, PrefabNPC.transform.position.y + radisWaypoint);
+            Vector2 npcPosition = npc.gameObject.transform.position;
+            float _x = Random.Range(npcPosition.x - radisWaypoint, npcPosition.x + radisWaypoint);
+            float _y = Random.Range(npcPosition.y - radisWaypoint, npcPosition.y + radisWaypoint);
             float _z = 0;
             Vector3 _newWaypoint = new Vector3(_x, _y, _z);
             agent.CalculatePath(_newWaypoint, navMeshPath);

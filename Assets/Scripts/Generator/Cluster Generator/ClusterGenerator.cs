@@ -7,11 +7,8 @@ public class ClusterGenerator : ScriptableObject
 {
     [SerializeField] private int roomsCount;
 
-    [SerializeField] private bool createHoles;
-    [SerializeField] private float probability;
-
-    [SerializeField] private GameObject StartRoom;
-    [SerializeField] private GameObject ExitRoom;
+    [SerializeField] private GameObject startRoom;
+    [SerializeField] private GameObject exitRoom;
     [SerializeField] private List<GameObject> roomsPool = new List<GameObject>();
 
 
@@ -89,15 +86,6 @@ public class ClusterGenerator : ScriptableObject
             CalculateVonNeumannArea(currentRoom);
         }
 
-        if (createHoles)
-        {
-            //Опциональные пробелы по окресности Мура ранга 1 (дополнительно проверить на правильность работы)
-            for (int i = 0; i < existedRooms.Count; i++)
-            {
-                MooreAreaEraser(existedRooms[i], probability);
-                CalculateVonNeumannArea(existedRooms[i]);
-            }
-        }
         PlaceExit();
 
         
@@ -182,48 +170,6 @@ public class ClusterGenerator : ScriptableObject
         return direction;
     }
 
-    private void MooreAreaEraser(RoomCell roomCell, float prob)
-    {
-        int maxMooreArea = 8;
-        int mooreAreaCounter = 0;
-        for (int i = roomCell.Y - 1; i <= roomCell.Y + 2; i++)
-        {
-            for (int j = roomCell.X - 1; j <= roomCell.X + 2; j++)
-            {
-                if (i != roomCell.Y && j != roomCell.X && roomCellGrid[i, j] != null)
-                {
-                    mooreAreaCounter++;
-                }
-            }
-        }
-        if (mooreAreaCounter == maxMooreArea)
-        {
-            double chance = Random.Range(0f, 1f);
-            if (chance < prob)
-            {
-                chance = Random.Range(0f, 1f);
-
-                if (chance < 0.125) RemoveRoom(roomCellGrid[roomCell.Y - 1, roomCell.X - 1]);
-                else if (chance < 0.25) RemoveRoom(roomCellGrid[roomCell.Y - 1, roomCell.X]);
-                else if (chance < 0.375) RemoveRoom(roomCellGrid[roomCell.Y - 1, roomCell.X + 1]);
-                else if (chance < 0.5) RemoveRoom(roomCellGrid[roomCell.Y, roomCell.X - 1]);
-                else if (chance < 0.625) RemoveRoom(roomCellGrid[roomCell.Y, roomCell.X + 1]);
-                else if (chance < 0.750) RemoveRoom(roomCellGrid[roomCell.Y + 1, roomCell.X - 1]);
-                else if (chance < 0.875) RemoveRoom(roomCellGrid[roomCell.Y + 1, roomCell.X]);
-                else RemoveRoom(roomCellGrid[roomCell.Y + 1, roomCell.X + 1]);
-            }
-        }
-    }
-
-    private void RemoveRoom(RoomCell room)
-    {
-        if (room != null)
-        {
-            roomCellGrid[room.Y, room.X] = null;
-            existedRooms.Remove(room);
-        }
-    }
-
     private void PlaceExit()
     {
         // Лаба Шолоха хд (ну почти)
@@ -270,11 +216,11 @@ public class ClusterGenerator : ScriptableObject
             }
             if (cell == StartCell && cell.Room == null)
             {
-                cell.Room = StartRoom;
+                cell.Room = startRoom;
             }
             else if (cell == ExitCell && cell.Room == null)
             {
-                cell.Room = ExitRoom;
+                cell.Room = exitRoom;
             }
             else
             {

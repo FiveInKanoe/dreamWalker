@@ -11,8 +11,6 @@ public class AgentScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //target = GameObject.FindGameObjectWithTag("Player").transform;
-
         agent = npc.View.NPCsAgent;
         agent.updateRotation = false;
         agent.updateUpAxis = false;

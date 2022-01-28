@@ -7,26 +7,20 @@ public class NPCAI : MonoBehaviour
 {
     [SerializeField] private NPC npc;
 
-    private GameObject target;
-
-    private Animator animator;
+    private Animator stateAnimator;
     private NavMeshAgent agent;
-
-    public GameObject Target { get => target; }
-    public NavMeshAgent Agent { get => agent; }
 
     void Start()
     {
-        animator = npc.View.StateAnimator;
-        agent = npc.View.NPCsAgent;
-        target = npc.Target;
+        stateAnimator = npc.View.StateAnimator;
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
+
     void Update()
     {
-        animator.SetFloat("distance", Vector3.Distance(transform.position, target.transform.position));
-        //Debug.Log(Vector3.Distance(transform.position, target.transform.position));
+        stateAnimator.SetFloat("distance", Vector3.Distance(transform.position, npc.Target.transform.position));
     }
+
 }
