@@ -12,8 +12,8 @@ public abstract class NPCBaseFSM : StateMachineBehaviour
         npc = animator.gameObject.GetComponent<NPC>();
 
         //???
-        npc.View.NPCsAgent.updateRotation = false;
-        npc.View.NPCsAgent.updateUpAxis = false;
+        npc.Manager.NPCsAgent.updateRotation = false;
+        npc.Manager.NPCsAgent.updateUpAxis = false;
     }
 
 }

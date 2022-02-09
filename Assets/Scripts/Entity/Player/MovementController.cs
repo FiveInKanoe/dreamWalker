@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour
 
     void Start()
     {
-        entityBody = player.View.PlayersBody;
+        entityBody = player.Manager.PlayersBody;
     }
 
     private void FixedUpdate()

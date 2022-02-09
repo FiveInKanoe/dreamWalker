@@ -17,7 +17,7 @@ public class CollisionHandler : MonoBehaviour
 
         }
 
-        if (player.View.PlayersCollider.IsTouching(other))
+        if (player.Manager.PlayersCollider.IsTouching(other))
         {
             Collectable collectableItem = other.GetComponent<Collectable>();
             if (collectableItem != null)
@@ -35,7 +35,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (player.PlayerClass == PlayerClass.WARRIOR)
         {
-            if (player.View.DamageAreaCollider.IsTouching(other) && player.IsAttacking)
+            if (player.Manager.DamageAreaCollider.IsTouching(other) && player.IsAttacking)
             {
                 NPC enemy = other.GetComponent<NPC>();
                 if (enemy != null)

@@ -13,8 +13,8 @@ public class AnimationNPCController : MonoBehaviour
 
     private void Start()
     {
-        animator = npc.View.SpriteAnimator;
-        NPCFSM = npc.View.StateAnimator;
+        animator = npc.Manager.SpriteAnimator;
+        NPCFSM = npc.Manager.StateAnimator;
     }
 
 
@@ -27,7 +27,7 @@ public class AnimationNPCController : MonoBehaviour
         //attack (1 поменять на атакующую дистанцию)
         npc.IsAttacking = NPCFSM.GetFloat("distance") <= 1;
 
-        Vector3 _driectionVecotr3 = npc.View.NPCsAgent.velocity;
+        Vector3 _driectionVecotr3 = npc.Manager.NPCsAgent.velocity;
         // Direction _directionCalculated;
         if (Mathf.Abs(_driectionVecotr3.x) > Mathf.Abs(_driectionVecotr3.y))
         {

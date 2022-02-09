@@ -331,6 +331,10 @@ PrefabInstance:
       propertyPath: isAlive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5802767966013343011, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
+      propertyPath: playerClass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5802767966444424244, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: m_Name
       value: Player

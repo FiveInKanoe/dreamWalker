@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerView : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D playersBody;
     [SerializeField] private Collider2D playersCollider;

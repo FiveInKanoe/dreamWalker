@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCView : MonoBehaviour
+public class NPCManager : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D npcsBody;
     

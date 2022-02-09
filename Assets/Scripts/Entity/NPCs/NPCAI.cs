@@ -12,7 +12,8 @@ public class NPCAI : MonoBehaviour
 
     void Start()
     {
-        stateAnimator = npc.View.StateAnimator;
+        stateAnimator = npc.Manager.StateAnimator;
+        agent = npc.Manager.NPCsAgent;
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;

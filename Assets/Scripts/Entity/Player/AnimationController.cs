@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour
 
     void Start()
     {
-        animator = player.View.SpriteAnimator;
+        animator = player.Manager.SpriteAnimator;
     }
 
     void FixedUpdate()

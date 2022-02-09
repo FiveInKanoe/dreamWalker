@@ -11,7 +11,7 @@ public class AgentScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = npc.View.NPCsAgent;
+        agent = npc.Manager.NPCsAgent;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }

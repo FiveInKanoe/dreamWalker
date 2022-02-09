@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bf72ad58417c8419808334f250fa2f, type: 3}
   m_Name: MageClass
   m_EditorClassIdentifier: 
-  ammo: {fileID: 2938143258208925543, guid: 0235c13e0467c2d4082b853384ea3bac, type: 3}
-  ammoLifeTime: 5
-  ammoDelayTime: 2
-  ammoVelocity: 2.5
+  lightning: {fileID: 1474116435274617872, guid: 0a1c8f74773b42549ab07845166503b9, type: 3}

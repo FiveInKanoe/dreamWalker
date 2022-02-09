@@ -26,11 +26,11 @@ public class Rage : Skills
         endOfEffectTime = 0;
         growthCoef = 1.2f;
         this.Player = player;
-        spriteTransform = player.View.SpriteAnimator.gameObject.transform;
+        spriteTransform = player.Manager.SpriteAnimator.gameObject.transform;
 
         if (spriteTransform != null)
         {
-            spriteRenderer = player.View.SpriteRenderer;
+            spriteRenderer = player.Manager.SpriteRenderer;
         }
     }
 

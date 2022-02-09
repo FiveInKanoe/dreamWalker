@@ -35,9 +35,9 @@ public class Patrol : NPCBaseFSM
         waypoints.Add(npc.gameObject.transform.position);
 
         navMeshPath = new NavMeshPath();
-        npc.View.NPCsAgent.acceleration = npc.Stats.Velocity;
+        npc.Manager.NPCsAgent.acceleration = npc.Stats.Velocity;
 
-        agent = npc.View.NPCsAgent;
+        agent = npc.Manager.NPCsAgent;
 
         GenerateWayPoints();
     }
@@ -68,7 +68,7 @@ public class Patrol : NPCBaseFSM
                     }
                 }
             }
-            npc.View.NPCsAgent.SetDestination(waypoints[currentWP]);
+            npc.Manager.NPCsAgent.SetDestination(waypoints[currentWP]);
             nowGoal = waypoints[currentWP];
         }
     }

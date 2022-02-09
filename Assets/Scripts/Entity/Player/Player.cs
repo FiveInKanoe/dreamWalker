@@ -10,7 +10,7 @@ public class Player : Entity
     [SerializeField] private List<Skills> skillSet = new List<Skills>();
     [SerializeField] private Inventory inventory;
 
-    [SerializeField] private PlayerView view;
+    [SerializeField] private PlayerManager manager;
 
     [SerializeField] private List<ClassControl> classControlTypes = new List<ClassControl>();
 
@@ -18,7 +18,7 @@ public class Player : Entity
     private GameObject skillContainer;
 
     public PlayerClass PlayerClass { get => playerClass; }
-    public PlayerView View { get => view; }
+    public PlayerManager Manager { get => manager; }
     public Inventory Inventory { get => inventory; }
 
 
@@ -41,19 +41,24 @@ public class Player : Entity
 
     }
 
-    void FixedUpdate()
+    private void Update()
     {
         foreach (Skills skill in skillSet)
         {
             skill.Usage();
         }
         classControl.Control();
+    }
+
+    void FixedUpdate()
+    {
+        
 
     }
 
     private void LateUpdate()
     {
-        view.SpriteRenderer.transform.rotation = Quaternion.identity;
+        manager.SpriteRenderer.transform.rotation = Quaternion.identity;
     }
 
     void OnApplicationQuit()

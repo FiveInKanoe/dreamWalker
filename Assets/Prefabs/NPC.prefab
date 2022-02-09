@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3321386830376232171}
   - component: {fileID: 4259969639136445650}
   - component: {fileID: 4259969639136445651}
-  - component: {fileID: 111831348318310143}
+  - component: {fileID: 1621758474822727937}
   - component: {fileID: 4259969639136445645}
   - component: {fileID: 4259969639136445644}
   - component: {fileID: 4259969639136445648}
@@ -119,7 +119,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &111831348318310143
+--- !u!114 &1621758474822727937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   mana: 0
   stats: {fileID: 11400000, guid: 3a0aef326b878d24ebbd3ca33ad09441, type: 2}
   isAlive: 1
-  view: {fileID: 111831348318310143}
+  manager: {fileID: 1621758474822727937}
   target: {fileID: 5802767966444424244, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
   itemPrefab: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
   itemPool:

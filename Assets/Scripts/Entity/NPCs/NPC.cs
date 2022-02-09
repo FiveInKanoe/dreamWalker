@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPC : Entity
 {
     
-    [SerializeField] private NPCView view;
+    [SerializeField] private NPCManager manager;
 
     [SerializeField] private GameObject target;
 
@@ -15,7 +15,7 @@ public class NPC : Entity
 
     //private int attackRadius = 100;
 
-    public NPCView View { get => view; }
+    public NPCManager Manager { get => manager; }
 
     public float AttackRadius { get; set; }
 
@@ -48,7 +48,7 @@ public class NPC : Entity
             
             if ((Vector2)transform.position != PrePushPosition + PushDirection)
             {
-                view.NPCsBody.AddForce(PushDirection);
+                manager.NPCsBody.AddForce(PushDirection);
             }
             else
             {
