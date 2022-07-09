@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -10,7 +8,7 @@ public class MovementController : MonoBehaviour
 
     void Start()
     {
-        entityBody = player.Manager.PlayersBody;
+        entityBody = player.Components.PlayersBody;
     }
 
     private void FixedUpdate()

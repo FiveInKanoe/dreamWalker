@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,19 +8,18 @@ public class Player : Entity
     [SerializeField] private List<Skills> skillSet = new List<Skills>();
     [SerializeField] private Inventory inventory;
 
-    [SerializeField] private PlayerManager manager;
-
+    [SerializeField] private PlayerComponents components;
     [SerializeField] private List<ClassControl> classControlTypes = new List<ClassControl>();
 
     private ClassControl classControl;
     private GameObject skillContainer;
 
-    public PlayerClass PlayerClass { get => playerClass; }
-    public PlayerManager Manager { get => manager; }
-    public Inventory Inventory { get => inventory; }
+    public PlayerClass PlayerClass => playerClass;
+    public PlayerComponents Components => components; 
+    public Inventory Inventory => inventory; 
 
 
-    void Start()
+    private void Start()
     {
         skillContainer = new GameObject("Skill Container");
         foreach (ClassControl control in classControlTypes)
@@ -38,7 +35,6 @@ public class Player : Entity
         {
             skill.Initialize(this, skillContainer);
         }
-
     }
 
     private void Update()
@@ -50,19 +46,14 @@ public class Player : Entity
         classControl.Control();
     }
 
-    void FixedUpdate()
-    {
-        
-
-    }
-
     private void LateUpdate()
     {
-        manager.SpriteRenderer.transform.rotation = Quaternion.identity;
+        components.SpriteRenderer.transform.rotation = Quaternion.identity;
     }
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         // inventory.ClearInventory();
     }
+
 }

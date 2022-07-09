@@ -15,8 +15,6 @@ GameObject:
   - component: {fileID: 4259969639136445651}
   - component: {fileID: 1621758474822727937}
   - component: {fileID: 4259969639136445645}
-  - component: {fileID: 4259969639136445644}
-  - component: {fileID: 4259969639136445648}
   - component: {fileID: 4500468922249350026}
   - component: {fileID: 3033844996163301484}
   m_Layer: 0
@@ -152,38 +150,12 @@ MonoBehaviour:
   mana: 0
   stats: {fileID: 11400000, guid: 3a0aef326b878d24ebbd3ca33ad09441, type: 2}
   isAlive: 1
-  manager: {fileID: 1621758474822727937}
+  components: {fileID: 1621758474822727937}
   target: {fileID: 5802767966444424244, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
   itemPrefab: {fileID: 5475366506920930953, guid: 2578508efaf220b48b674a754b3fa1fd, type: 3}
   itemPool:
   - {fileID: 11400000, guid: b2f5a028df979fd4e8c2b70da734ffbb, type: 2}
   - {fileID: 11400000, guid: 9a7495b4dcf57d8429f413a257d71211, type: 2}
---- !u!114 &4259969639136445644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259969639136445640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e268d3d50b40c8140911eac18cb186fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npc: {fileID: 4259969639136445645}
---- !u!114 &4259969639136445648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4259969639136445640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ae6fd1b488d604dab8d7a324ab12b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npc: {fileID: 4259969639136445645}
 --- !u!114 &4500468922249350026
 MonoBehaviour:
   m_ObjectHideFlags: 0

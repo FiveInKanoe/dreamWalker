@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rage", menuName = "Skills/Rage")]
@@ -26,11 +24,11 @@ public class Rage : Skills
         endOfEffectTime = 0;
         growthCoef = 1.2f;
         this.Player = player;
-        spriteTransform = player.Manager.SpriteAnimator.gameObject.transform;
+        spriteTransform = player.Components.SpriteAnimator.gameObject.transform;
 
         if (spriteTransform != null)
         {
-            spriteRenderer = player.Manager.SpriteRenderer;
+            spriteRenderer = player.Components.SpriteRenderer;
         }
     }
 

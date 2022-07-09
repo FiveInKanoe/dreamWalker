@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -172,12 +171,6 @@ public class ClusterGenerator : ScriptableObject
 
     private void PlaceExit()
     {
-        // Лаба Шолоха хд (ну почти)
-        /* TODO:
-         * Можно потом написать алгоритм с лабы
-         * для создания максимально удаленных точек старта и конца,
-         * т. е. инициализировать вход, как и выход, в самом конце
-         */
         ExitCell = existedRooms[existedRooms.Count - 1];
         double maxLength = Mathf.Sqrt(Mathf.Pow(ExitCell.X - StartCell.X, 2) + Mathf.Pow(ExitCell.Y - StartCell.Y, 2));
         for (int i = 1; i < existedRooms.Count; i++)

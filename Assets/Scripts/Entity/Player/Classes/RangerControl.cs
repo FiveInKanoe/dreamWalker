@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RangerClass", menuName = "Player Classes/Ranger Class")]
@@ -28,7 +26,6 @@ public class RangerControl : ClassControl
 
     public override void Control()
     {
-        //ËÊÌ
         if (Input.GetMouseButton(0) && Time.time > endOfDelay)
         {
             PerformAttack();

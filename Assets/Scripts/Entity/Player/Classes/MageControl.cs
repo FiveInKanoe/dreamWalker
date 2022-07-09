@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MageClass", menuName = "Player Classes/Mage Class")]
@@ -22,7 +20,6 @@ public class MageControl : ClassControl
 
     public override void Control()
     {
-        //À Ã
         if (Input.GetMouseButtonDown(0))
         {
             PerformAttack();

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
@@ -17,7 +15,7 @@ public class CollisionHandler : MonoBehaviour
 
         }
 
-        if (player.Manager.PlayersCollider.IsTouching(other))
+        if (player.Components.PlayersCollider.IsTouching(other))
         {
             Collectable collectableItem = other.GetComponent<Collectable>();
             if (collectableItem != null)
@@ -35,7 +33,7 @@ public class CollisionHandler : MonoBehaviour
     {
         if (player.PlayerClass == PlayerClass.WARRIOR)
         {
-            if (player.Manager.DamageAreaCollider.IsTouching(other) && player.IsAttacking)
+            if (player.Components.DamageAreaCollider.IsTouching(other) && player.IsAttacking)
             {
                 NPC enemy = other.GetComponent<NPC>();
                 if (enemy != null)

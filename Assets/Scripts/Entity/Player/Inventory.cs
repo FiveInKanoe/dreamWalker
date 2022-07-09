@@ -1,15 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory")]
 public class Inventory : ScriptableObject
 {
-    /*  TODO:
-     *  - Реализовать размер инвентаря 
-     *  ("Бесконечный", на данный момент)
-     *
-     */
     [SerializeField] private int inventorySize;
     [SerializeField] private List<InventorySlot> inventory;
 

@@ -115,7 +115,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 054e47ada4657f54587dd6406d7e9a68, type: 2}
   - {fileID: 11400000, guid: d19c569b576ba264fb4549bc64b98f78, type: 2}
   inventory: {fileID: 11400000, guid: 73932541a38348345949075542d60d19, type: 2}
-  manager: {fileID: 1837520155141708330}
+  components: {fileID: 1837520155141708330}
   classControlTypes:
   - {fileID: 11400000, guid: 8b3c8bece0c51ce488f6fd5e384b75a5, type: 2}
   - {fileID: 11400000, guid: 4b35dbb1378265e429ed6046f461ffc1, type: 2}
