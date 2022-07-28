@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MageClass", menuName = "Player Classes/Mage Class")]
@@ -18,15 +19,14 @@ public class MageControl : ClassControl
         partSys = lightning.GetComponent<ParticleSystem>();
     }
 
-    public override void Control()
+    public override IEnumerator Control()
     {
-        if (Input.GetMouseButtonDown(0))
+        while (true)
         {
+            yield return new WaitUntil(() => Input.GetMouseButton(0));
             PerformAttack();
             Player.IsAttacking = true;
-        }
-        else
-        {
+            yield return new WaitForSecondsRealtime(AttackCoolDown);
             Player.IsAttacking = false;
         }
     }

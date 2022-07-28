@@ -1,17 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WarriorClass", menuName = "Player Classes/Warrior Class")]
 public class WarriorControl : ClassControl
 {
 
-    public override void Control()
+    public override IEnumerator Control()
     {
-        if (Input.GetMouseButton(0))
+        while (true)
         {
+            yield return new WaitUntil(() => Input.GetMouseButton(0));
             Player.IsAttacking = true;
-        }
-        else
-        {
+            yield return new WaitForSecondsRealtime(AttackCoolDown);
             Player.IsAttacking = false;
         }
     }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RangerClass", menuName = "Player Classes/Ranger Class")]
@@ -5,9 +6,7 @@ public class RangerControl : ClassControl
 {
     [SerializeField] private GameObject ammo;
     [SerializeField] private float ammoLifeTime;
-    [SerializeField] private float ammoDelayTime;
     [SerializeField] private float ammoVelocity;
-    private float endOfDelay;
 
     private GameObject ammoContainer;
 
@@ -15,7 +14,6 @@ public class RangerControl : ClassControl
     {
         ammoContainer = null;
         ClassType = PlayerClass.RANGER;
-        endOfDelay = 0;
     }
 
     public override void Initialize(Player player)
@@ -24,16 +22,14 @@ public class RangerControl : ClassControl
         ammoContainer = new GameObject("Players Ammo Container");
     }
 
-    public override void Control()
+    public override IEnumerator Control()
     {
-        if (Input.GetMouseButton(0) && Time.time > endOfDelay)
+        while (true)
         {
+            yield return new WaitUntil(() => Input.GetMouseButton(0));
             PerformAttack();
             Player.IsAttacking = true;
-            endOfDelay = Time.time + ammoDelayTime;
-        }
-        else
-        {
+            yield return new WaitForSecondsRealtime(AttackCoolDown);
             Player.IsAttacking = false;
         }
     }

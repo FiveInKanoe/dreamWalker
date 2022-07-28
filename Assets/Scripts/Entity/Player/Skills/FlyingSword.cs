@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "FlyingSword", menuName = "Skills/Flying Sword")]
@@ -14,19 +15,19 @@ public class FlyingSword : Skills
 
     public override void Initialize(Player player, GameObject skillContainer)
     {
-        NextUsageTime = 0;
         SkillContainer = skillContainer;
-        this.Player = player;
+        Player = player;
         flyingSwordCont = new GameObject("FlyingSword");
-        flyingSwordCont.transform.SetParent(this.SkillContainer.transform);
+        flyingSwordCont.transform.SetParent(SkillContainer.transform);
     }
 
-    public override void Usage()
+    public override IEnumerator Usage()
     {
-        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        while (true)
         {
+            yield return new WaitUntil(() => Input.GetKey(HotKey));
             Perform();
-            NextUsageTime = Time.time + CoolDown;
+            yield return new WaitForSecondsRealtime(CoolDown);
         }
     }
 

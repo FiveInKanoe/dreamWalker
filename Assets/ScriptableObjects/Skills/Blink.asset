@@ -16,5 +16,4 @@ MonoBehaviour:
   coolDown: 3
   manaCost: 0
   maxRadius: 5
-  markerSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  markerColor: {r: 0, g: 1, b: 0.12921238, a: 0.5176471}
+  markerPrefab: {fileID: 3070394884728177785, guid: 7dfba4e997c7b474aacac71a5c24060b, type: 3}

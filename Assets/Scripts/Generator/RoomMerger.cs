@@ -6,7 +6,7 @@ public class RoomMerger : MonoBehaviour
 {
 
     [SerializeField] private ClusterGenerator clustGen;
-    [SerializeField] private List<GameObject> structures;
+    [SerializeField] private List<Room> structures = new List<Room>();
     [SerializeField] private float probability;
 
     private RoomCell[,] cellMatrix;
@@ -29,7 +29,7 @@ public class RoomMerger : MonoBehaviour
         for (int i = 0; i < structures.Count; i++)
         {
             placesForStructures.Add(new List<BoundsInt>());
-            CreateStructures(structures[i].GetComponent<RoomComponents>().Layers, i + 1);
+            CreateStructures(structures[i].GetComponent<Room>().Layers, i + 1);
         }   
     }
 
@@ -37,7 +37,7 @@ public class RoomMerger : MonoBehaviour
     {
         const int BACKGROUND_IDX = 1, FOREGROUND_IDX = 3;
 
-        int layersCount = clustGen.StartCell.Room.GetComponent<RoomComponents>().Layers.Count;
+        int layersCount = clustGen.StartCell.Room.GetComponent<Room>().Layers.Count;
         int countOfDecoLayers = (layersCount - 1) / 2;
 
         for (int i = -1; i < layersCount - 1; i++)
@@ -82,7 +82,7 @@ public class RoomMerger : MonoBehaviour
                 if (cell != null)
                 {
 
-                    RoomComponents roomInfo = cell.Room.GetComponent<RoomComponents>();
+                    Room roomInfo = cell.Room.GetComponent<Room>();
 
                     Tilemap currentLayer = roomInfo.Layers[0];
 
@@ -218,8 +218,6 @@ public class RoomMerger : MonoBehaviour
         }
 
         
-
-        //редачить тут
         foreach (BoundsInt freeArea in placesForStructures[structureIdx])
         {
             TileBase[] emptyTiles = new TileBase[freeArea.size.x * freeArea.size.y];

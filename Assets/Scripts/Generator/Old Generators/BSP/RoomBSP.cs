@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class Room
+class RoomBSP
 {
     public int X { get; private set; }
     public int Y { get; private set; }
@@ -11,7 +11,7 @@ class Room
     public int Xend { get; private set; }
     public int Yend { get; private set; }
 
-    public Room(int x, int y, int width, int height)
+    public RoomBSP(int x, int y, int width, int height)
     {
         X = x;
         Y = y;

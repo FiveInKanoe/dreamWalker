@@ -93,7 +93,7 @@ class CellularAutomata : Generator
 
     private void MakeWallSpaces(int offset) //Костыльный метод создания пустых пространств в стенах
     {
-        foreach (Room room in BSP.Rooms)
+        foreach (RoomBSP room in BSP.Rooms)
         {
             for (int y = room.Y; y <= room.Yend; y++)
             {
@@ -115,7 +115,7 @@ class CellularAutomata : Generator
         {
             if (leaf.Halls != null)
             {
-                foreach (Room hall in leaf.Halls)
+                foreach (RoomBSP hall in leaf.Halls)
                 {
                     for (int y = hall.Y; y <= hall.Yend; y++)
                     {

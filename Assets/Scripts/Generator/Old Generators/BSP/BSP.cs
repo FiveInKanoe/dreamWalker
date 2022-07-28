@@ -25,16 +25,16 @@ class BSP : Generator
     private Leaf root;
 
     private List<Leaf> leaves;
-    private List<Room> rooms;
+    private List<RoomBSP> rooms;
 
     public List<Leaf> Leaves { get => leaves; }
-    public List<Room> Rooms { get => rooms; }
+    public List<RoomBSP> Rooms { get => rooms; }
 
     private bool didSplit;
 
     public override void InitMap(char[,] charMap, bool isPreGen)
     {
-        rooms = new List<Room>();
+        rooms = new List<RoomBSP>();
         didSplit = true;
         leaves = new List<Leaf>();
 
@@ -128,7 +128,7 @@ class BSP : Generator
 
     private void SetRooms()
     {
-        foreach (Room room in rooms)
+        foreach (RoomBSP room in rooms)
         {
             for (int y = room.Y; y <= room.Yend; y++)
             {
@@ -150,7 +150,7 @@ class BSP : Generator
             {
                 continue;
             }
-            foreach (Room hall in leaf.Halls)
+            foreach (RoomBSP hall in leaf.Halls)
             {
                 for (int y = hall.Y; y <= hall.Yend; y++)
                 {

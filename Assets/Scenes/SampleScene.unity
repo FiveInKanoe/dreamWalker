@@ -270,14 +270,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 219926343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f7d770b94f0a41913a34303345f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   clustGen: {fileID: 11400000, guid: d2bc671aef5c9944f82a0c694bf55bd2, type: 2}
   structures:
-  - {fileID: 4453474518204534992, guid: 8402ba72ffdcadb4facb43b4a7685d19, type: 3}
+  - {fileID: 8295635765734738307, guid: 8402ba72ffdcadb4facb43b4a7685d19, type: 3}
+  - {fileID: 2448828634898711749, guid: ffaa8c678142af6419194b2983613e23, type: 3}
   probability: 0.29
 --- !u!156049354 &219926345
 Grid:
@@ -831,7 +832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5802767966013343011, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: playerClass
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5802767966013343011, guid: d47120f16d009dd4b80a46fc5c841468, type: 3}
       propertyPath: classControlTypes.Array.size

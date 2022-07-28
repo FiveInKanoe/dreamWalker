@@ -14,8 +14,8 @@ class Leaf
     public Leaf RightChild { get; private set; }
     public Leaf LeftChild { get; private set; }
 
-    public List<Room> Halls { get; private set; }
-    public Room Room { get; private set; }
+    public List<RoomBSP> Halls { get; private set; }
+    public RoomBSP Room { get; private set; }
 
 
     public Leaf(int x, int y, int width, int height)
@@ -96,12 +96,12 @@ class Leaf
             int roomX = Random.Range(fromWallOffset, Width - roomWidth - fromWallOffset);
             int roomY = Random.Range(fromWallOffset, Height - roomHeight - fromWallOffset);
 
-            Room = new Room(X + roomX, Y + roomY, roomWidth, roomHeight);
+            Room = new RoomBSP(X + roomX, Y + roomY, roomWidth, roomHeight);
         }
     }
 
 
-    private Room GetRoom()
+    private RoomBSP GetRoom()
     {
         if (Room != null)
         {
@@ -109,8 +109,8 @@ class Leaf
         }
         else
         {
-            Room leftRoom = null;
-            Room rightRoom = null;
+            RoomBSP leftRoom = null;
+            RoomBSP rightRoom = null;
 
             if (LeftChild != null) { leftRoom = LeftChild.GetRoom(); }
 
@@ -128,9 +128,9 @@ class Leaf
         }
     }
 
-    private void CreateHall(Room leftRoom, Room rightRoom, int minHallSize)
+    private void CreateHall(RoomBSP leftRoom, RoomBSP rightRoom, int minHallSize)
     {
-        Halls = new List<Room>();
+        Halls = new List<RoomBSP>();
         int point1x = Random.Range(leftRoom.X + 1, leftRoom.Xend - 4);
         int point1y = Random.Range(leftRoom.Y + 1, leftRoom.Yend - 4);
 
@@ -146,31 +146,31 @@ class Leaf
             {
                 if (Random.Range(0f, 1f) < 0.5)
                 {
-                    Halls.Add(new Room(point2x, point1y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point2x, point2y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point2x, point1y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point2x, point2y, minHallSize, Mathf.Abs(height)));
                 }
                 else
                 {
-                    Halls.Add(new Room(point2x, point2y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point1x, point2y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point2x, point2y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point1x, point2y, minHallSize, Mathf.Abs(height)));
                 }
             }
             else if (height > 0)
             {
                 if (Random.Range(0f, 1f) < 0.5)
                 {
-                    Halls.Add(new Room(point2x, point1y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point2x, point1y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point2x, point1y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point2x, point1y, minHallSize, Mathf.Abs(height)));
                 }
                 else
                 {
-                    Halls.Add(new Room(point2x, point2y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point1x, point1y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point2x, point2y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point1x, point1y, minHallSize, Mathf.Abs(height)));
                 }
             }
             else
             {
-                Halls.Add(new Room(point2x, point2y, Mathf.Abs(width), minHallSize));
+                Halls.Add(new RoomBSP(point2x, point2y, Mathf.Abs(width), minHallSize));
             }
         }
         else if (width > 0)
@@ -179,42 +179,42 @@ class Leaf
             {
                 if (Random.Range(0f, 1f) < 0.5)
                 {
-                    Halls.Add(new Room(point1x, point2y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point1x, point2y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point1x, point2y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point1x, point2y, minHallSize, Mathf.Abs(height)));
                 }
                 else
                 {
-                    Halls.Add(new Room(point1x, point1y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point2x, point2y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point1x, point1y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point2x, point2y, minHallSize, Mathf.Abs(height)));
                 }
             }
             else if (height > 0)
             {
                 if (Random.Range(0f, 1f) < 0.5)
                 {
-                    Halls.Add(new Room(point1x, point1y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point2x, point1y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point1x, point1y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point2x, point1y, minHallSize, Mathf.Abs(height)));
                 }
                 else
                 {
-                    Halls.Add(new Room(point1x, point2y, Mathf.Abs(width), minHallSize));
-                    Halls.Add(new Room(point1x, point1y, minHallSize, Mathf.Abs(height)));
+                    Halls.Add(new RoomBSP(point1x, point2y, Mathf.Abs(width), minHallSize));
+                    Halls.Add(new RoomBSP(point1x, point1y, minHallSize, Mathf.Abs(height)));
                 }
             }
             else
             {
-                Halls.Add(new Room(point1x, point1y, Mathf.Abs(width), minHallSize));
+                Halls.Add(new RoomBSP(point1x, point1y, Mathf.Abs(width), minHallSize));
             }
         }
         else
         {
             if (height < 0)
             {
-                Halls.Add(new Room(point2x, point2y, minHallSize, Mathf.Abs(height)));
+                Halls.Add(new RoomBSP(point2x, point2y, minHallSize, Mathf.Abs(height)));
             }
             else if (height > 0)
             {
-                Halls.Add(new Room(point1x, point1y, minHallSize, Mathf.Abs(height)));
+                Halls.Add(new RoomBSP(point1x, point1y, minHallSize, Mathf.Abs(height)));
             }
         }
     }

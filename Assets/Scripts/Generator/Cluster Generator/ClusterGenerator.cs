@@ -6,30 +6,37 @@ public class ClusterGenerator : ScriptableObject
 {
     [SerializeField] private int roomsCount;
 
-    [SerializeField] private GameObject startRoom;
-    [SerializeField] private GameObject exitRoom;
-    [SerializeField] private List<GameObject> roomsPool = new List<GameObject>();
-
+    [SerializeField] private Room startRoom;
+    [SerializeField] private Room exitRoom;
+    [SerializeField] private List<Room> roomsPool = new List<Room>();
 
     private RoomCell[,] roomCellGrid;
-    private List<RoomCell> existedRooms;
+    private List<RoomCell> existedCells;
 
     private int tempRoomsCount;
+    private Dictionary<Direction, Vector2Int> directionVectors;
 
     public RoomCell StartCell { get; private set; }
     public RoomCell ExitCell { get; private set; }
 
     private void OnEnable()
     {
+        directionVectors = new Dictionary<Direction, Vector2Int>()
+        {
+            { Direction.NORTH, new Vector2Int(-1, 0) },
+            { Direction.EAST, new Vector2Int(0, 1) },
+            { Direction.SOUTH, new Vector2Int(1, 0) },
+            { Direction.WEST, new Vector2Int(0, -1) }
+        };
+
         roomCellGrid = new RoomCell[roomsCount * 2 + 3, roomsCount * 2 + 3];
         StartCell = new RoomCell(roomsCount + 1, roomsCount + 1);
         roomCellGrid[StartCell.Y, StartCell.X] = StartCell;
 
         tempRoomsCount = roomsCount - 1;
 
-        existedRooms = new List<RoomCell>();
-        existedRooms.Add(StartCell);
-
+        existedCells = new List<RoomCell>();
+        existedCells.Add(StartCell);
 
         Generate();
         Shuffle();
@@ -39,50 +46,39 @@ public class ClusterGenerator : ScriptableObject
 
     private void Generate()
     {
-        int maxVonNeumannArea = 4;
+        const int MAX_VON_NEUMANN_AREA = 4;
+        Direction[] allDirections = (Direction[])System.Enum.GetValues(typeof(Direction));
 
         RoomCell currentRoom = StartCell;
         while (tempRoomsCount != 0)
         {
-            int roomGenCounter = Random.Range(1, maxVonNeumannArea + 1);
+            int roomGenCounter = Random.Range(1, MAX_VON_NEUMANN_AREA + 1);
 
             if (roomGenCounter > tempRoomsCount)
             {
                 roomGenCounter -= roomGenCounter - tempRoomsCount;
             }
-            if (roomGenCounter + currentRoom.VonNeumannAreaRooms.Count > maxVonNeumannArea)
+            if (roomGenCounter + currentRoom.AreaRooms.Count > MAX_VON_NEUMANN_AREA)
             {
-                roomGenCounter -= (roomGenCounter + currentRoom.VonNeumannAreaRooms.Count) - maxVonNeumannArea;
+                roomGenCounter -= (roomGenCounter + currentRoom.AreaRooms.Count) - MAX_VON_NEUMANN_AREA;
             }
             while (roomGenCounter != 0)
             {
-                bool result = false;
-                Direction direction = GetRandomDirection();
-                switch (direction)
-                {
-                    case Direction.NORTH:
-                        result = PlaceRoom(currentRoom, -1, 0);
-                        break;
-                    case Direction.EAST:
-                        result = PlaceRoom(currentRoom, 0, 1);
-                        break;
-                    case Direction.SOUTH:
-                        result = PlaceRoom(currentRoom, 1, 0);
-                        break;
-                    case Direction.WEST:
-                        result = PlaceRoom(currentRoom, 0, -1);
-                        break;
-                }
+                Direction direction = allDirections[Random.Range(0, allDirections.Length)];
+                bool result = PlaceNextRoom(currentRoom, directionVectors[direction]);
+
                 if (result)
                 {
                     roomGenCounter--;
                 }
             }
 
-            CalculateVonNeumannArea(currentRoom);
-            int idx = Random.Range(0, currentRoom.VonNeumannAreaRooms.Count);
-            currentRoom = currentRoom.VonNeumannAreaRooms[idx];
-            CalculateVonNeumannArea(currentRoom);
+            CalculateRoomsInRoomsArea(currentRoom);
+
+            int nextRoomsIndex = Random.Range(0, currentRoom.AreaRooms.Count);
+            currentRoom = currentRoom.AreaRooms[nextRoomsIndex];
+
+            CalculateRoomsInRoomsArea(currentRoom);
         }
 
         PlaceExit();
@@ -90,95 +86,48 @@ public class ClusterGenerator : ScriptableObject
         
     }
 
-    private bool PlaceRoom(RoomCell roomCell, int y, int x)
+    private bool PlaceNextRoom(RoomCell roomCell, Vector2Int position)
     {
+        int x = position.x, y = position.y;
         bool result = false;
         if (roomCellGrid[roomCell.Y + y, roomCell.X + x] == null)
         {
-            roomCellGrid[roomCell.Y + y, roomCell.X + x] = new RoomCell(roomCell.Y + y, roomCell.X + x);
-            existedRooms.Add(roomCellGrid[roomCell.Y + y, roomCell.X + x]);
+            roomCellGrid[roomCell.Y + y, roomCell.X + x] = new RoomCell(roomCell.Position + position);
+            existedCells.Add(roomCellGrid[roomCell.Y + y, roomCell.X + x]);
             tempRoomsCount--;
             result = true;
         }
         return result;
     }
 
-    private void CalculateVonNeumannArea(RoomCell roomCell)
+    private void CalculateRoomsInRoomsArea(RoomCell roomCell)
     {
-        RoomCell tempRoomCell;
-        tempRoomCell = roomCellGrid[roomCell.Y + 1, roomCell.X];
-        if (tempRoomCell != null)
+        RoomCell potentialRoom;
+        foreach (Vector2Int directionVector in directionVectors.Values)
         {
-            if (!roomCell.VonNeumannAreaRooms.Contains(tempRoomCell))
+            Vector2Int tempRoomPos = roomCell.Position + directionVector;
+            potentialRoom = roomCellGrid[tempRoomPos.y, tempRoomPos.x];
+            if (potentialRoom != null)
             {
-                roomCell.VonNeumannAreaRooms.Add(tempRoomCell);
+                if (!roomCell.AreaRooms.Contains(potentialRoom))
+                {
+                    roomCell.AreaRooms.Add(potentialRoom);
+                }
             }
         }
-        tempRoomCell = roomCellGrid[roomCell.Y - 1, roomCell.X];
-        if (tempRoomCell != null)
-        {
-            if (!roomCell.VonNeumannAreaRooms.Contains(tempRoomCell))
-            {
-                roomCell.VonNeumannAreaRooms.Add(tempRoomCell);
-            }
-        }
-        tempRoomCell = roomCellGrid[roomCell.Y, roomCell.X + 1];
-        if (tempRoomCell != null)
-        {
-            if (!roomCell.VonNeumannAreaRooms.Contains(tempRoomCell))
-            {
-                roomCell.VonNeumannAreaRooms.Add(tempRoomCell);
-            }
-        }
-        tempRoomCell = roomCellGrid[roomCell.Y, roomCell.X - 1];
-        if (tempRoomCell != null)
-        {
-            if (!roomCell.VonNeumannAreaRooms.Contains(tempRoomCell))
-            {
-                roomCell.VonNeumannAreaRooms.Add(tempRoomCell);
-            }
-        }
-    }
-
-    private Direction GetRandomDirection()
-    {
-        Direction direction;
-        double chance = Random.Range(0f, 1f);
-        if (chance >= 0.5)
-        {
-            if (chance >= 0.75)
-            {
-                direction = Direction.NORTH;
-            }
-            else
-            {
-                direction = Direction.EAST;
-            }
-        }
-        else
-        {
-            if (chance < 0.25)
-            {
-                direction = Direction.SOUTH;
-            }
-            else
-            {
-                direction = Direction.WEST;
-            }
-        }
-        return direction;
     }
 
     private void PlaceExit()
     {
-        ExitCell = existedRooms[existedRooms.Count - 1];
-        double maxLength = Mathf.Sqrt(Mathf.Pow(ExitCell.X - StartCell.X, 2) + Mathf.Pow(ExitCell.Y - StartCell.Y, 2));
-        for (int i = 1; i < existedRooms.Count; i++)
+        ExitCell = existedCells[existedCells.Count - 1];
+
+        float maxLength = Vector2Int.Distance(StartCell.Position, ExitCell.Position);
+        for (int i = 1; i < existedCells.Count; i++)
         {
-            double tempLength = Mathf.Sqrt(Mathf.Pow(existedRooms[i].X - StartCell.X, 2) + Mathf.Pow(existedRooms[i].Y - StartCell.Y, 2));
+            float tempLength = Vector2Int.Distance(StartCell.Position, existedCells[i].Position);
             if (tempLength > maxLength)
             {
-                ExitCell = existedRooms[i];
+                ExitCell = existedCells[i];
                 maxLength = tempLength;
             }
         }
@@ -190,7 +139,7 @@ public class ClusterGenerator : ScriptableObject
         for (int i = roomsPool.Count - 1; i > 0; i--)
         {
             j = (int)Mathf.Floor(Random.Range(0, i + 1));
-            GameObject room = roomsPool[j];
+            Room room = roomsPool[j];
             roomsPool[j] = roomsPool[i];
             roomsPool[i] = room;
         }
@@ -199,7 +148,7 @@ public class ClusterGenerator : ScriptableObject
     private void PlaceRoomsInCells()
     {
         int poolIdx = 0;
-        foreach (RoomCell cell in existedRooms)
+        foreach (RoomCell cell in existedCells)
         {
             
             if (poolIdx == roomsPool.Count)
@@ -207,11 +156,12 @@ public class ClusterGenerator : ScriptableObject
                 poolIdx = 0;
                 Shuffle();
             }
-            if (cell == StartCell && cell.Room == null)
+
+            if (cell == StartCell)
             {
                 cell.Room = startRoom;
             }
-            else if (cell == ExitCell && cell.Room == null)
+            else if (cell == ExitCell)
             {
                 cell.Room = exitRoom;
             }
@@ -219,10 +169,8 @@ public class ClusterGenerator : ScriptableObject
             {
                 cell.Room = roomsPool[poolIdx];
             }
-            if (cell.Room != null)
-            {
-                poolIdx++;
-            }
+
+            poolIdx++;
         }
     }
 
@@ -232,7 +180,8 @@ public class ClusterGenerator : ScriptableObject
         int minY = int.MaxValue;
         int maxX = int.MinValue;
         int maxY = int.MinValue;
-        foreach (RoomCell cell in existedRooms)
+
+        foreach (RoomCell cell in existedCells)
         {
             if (minX > cell.X)
             {
@@ -251,11 +200,14 @@ public class ClusterGenerator : ScriptableObject
                 maxY = cell.Y;
             }
         }
+
         RoomCell[,] cuttedMap = new RoomCell[Mathf.Abs(maxY - minY) + 1, Mathf.Abs(maxX - minX) + 1];
-        foreach (RoomCell cell in existedRooms)
+
+        foreach (RoomCell cell in existedCells)
         {
-            cuttedMap[cell.Y - minY, cell.X - minX] = cell;
+            cuttedMap[cell.Y - minY, cell.X - minX] = cell;       
         }
+
         return cuttedMap;
     }
 }

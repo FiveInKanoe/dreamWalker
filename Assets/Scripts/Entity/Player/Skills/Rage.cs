@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Rage", menuName = "Skills/Rage")]
@@ -11,19 +12,16 @@ public class Rage : Skills
     [SerializeField] private Color rageColor;
 
 
-    private float endOfEffectTime;
-
 
     private Transform spriteTransform;
     private SpriteRenderer spriteRenderer;
 
     public override void Initialize(Player player, GameObject skillContainer)
     {
-        NextUsageTime = 0;
         SkillContainer = skillContainer;
-        endOfEffectTime = 0;
+
         growthCoef = 1.2f;
-        this.Player = player;
+        Player = player;
         spriteTransform = player.Components.SpriteAnimator.gameObject.transform;
 
         if (spriteTransform != null)
@@ -32,18 +30,15 @@ public class Rage : Skills
         }
     }
 
-    public override void Usage()
+    public override IEnumerator Usage()
     {
-        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        while (true)
         {
+            yield return new WaitUntil( () => Input.GetKey(HotKey) );
             Perform();
-            NextUsageTime = Time.time + CoolDown;
-            endOfEffectTime = Time.time + activeTime;
-        }
-        if (endOfEffectTime != 0 && Time.time > endOfEffectTime)
-        {
+            yield return new WaitForSecondsRealtime(activeTime);
             ToDefault();
-            endOfEffectTime = 0;
+            yield return new WaitForSecondsRealtime(CoolDown - activeTime);
         }
     }
 

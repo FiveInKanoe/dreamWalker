@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Skills : ScriptableObject
@@ -13,9 +14,8 @@ public abstract class Skills : ScriptableObject
     public float ManaCost { get => manaCost; protected set => manaCost = value; }
 
     protected GameObject SkillContainer { get; set; }
-    protected float NextUsageTime { get; set; }
 
     public abstract void Initialize(Player player, GameObject skillContainer);
 
-    public abstract void Usage();
+    public abstract IEnumerator Usage();
 }

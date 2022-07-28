@@ -30,20 +30,20 @@ public class Player : Entity
                 break;
             }    
         }
+
         classControl.Initialize(this);
+        StartCoroutine(classControl.Control());
+
         foreach (Skills skill in skillSet)
         {
             skill.Initialize(this, skillContainer);
+            StartCoroutine(skill.Usage());
         }
     }
 
     private void Update()
     {
-        foreach (Skills skill in skillSet)
-        {
-            skill.Usage();
-        }
-        classControl.Control();
+        
     }
 
     private void LateUpdate()
@@ -53,6 +53,7 @@ public class Player : Entity
 
     private void OnApplicationQuit()
     {
+        StopAllCoroutines();
         // inventory.ClearInventory();
     }
 

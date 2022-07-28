@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: ClusterGenerator
   m_EditorClassIdentifier: 
   roomsCount: 256
-  startRoom: {fileID: 4251876434795759270, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
-  exitRoom: {fileID: 4251876434795759270, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  startRoom: {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  exitRoom: {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
   roomsPool:
-  - {fileID: 4251876434795759270, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  - {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  - {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  - {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  - {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}
+  - {fileID: 3600442921696725356, guid: 423c910081cc3cf468eeddbf06e2a52d, type: 3}

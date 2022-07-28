@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50931485e138ef74db0ebee5871ba070, type: 3}
   m_Name: RangerClass
   m_EditorClassIdentifier: 
+  attackCoolDown: 0.5
   ammo: {fileID: 2145828671391751326, guid: 7a64dbf4ccc7f4e47adcc5f27f776774, type: 3}
   ammoLifeTime: 2
-  ammoDelayTime: 0.15
   ammoVelocity: 14

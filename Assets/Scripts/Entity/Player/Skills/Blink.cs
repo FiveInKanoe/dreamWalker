@@ -7,102 +7,61 @@ using UnityEngine;
 public class Blink : Skills
 {
     [SerializeField] private float maxRadius;
-    [SerializeField] private Sprite markerSprite;
-    [SerializeField] private Color markerColor;
+    [SerializeField] private BlinkMarker markerPrefab;
 
     private GameObject blinkCont;
-    private GameObject marker;
 
-
-    private bool isBlinkPerformed;
-    private bool isKeyPressed;
+    private BlinkMarker currentMarker;
 
 
     public override void Initialize(Player player, GameObject skillContainer)
     {
-        NextUsageTime = 0;
         SkillContainer = skillContainer;
-        isBlinkPerformed = false;
-        isKeyPressed = false;
-        this.Player = player;
+
+        Player = player;
         blinkCont = new GameObject("Blink");
-        blinkCont.transform.SetParent(this.SkillContainer.transform);
+        blinkCont.transform.SetParent(SkillContainer.transform);  
     }
 
-    public override void Usage()
+    public override IEnumerator Usage()
     {
-        if (Input.GetKey(HotKey) && Time.time > NextUsageTime)
+        while (true)
         {
-            isKeyPressed = true;
-        }
-        if (isKeyPressed && !isBlinkPerformed)
-        {
+            yield return new WaitUntil(() => Input.GetKey(HotKey));
             Perform();
-            if (isBlinkPerformed)
+
+            bool isBlinked = false;
+            yield return new WaitUntil(() => 
+            { 
+                isBlinked = Input.GetMouseButton(0);
+                return Input.GetMouseButton(0) || Input.GetMouseButton(1);
+            });
+
+            if (isBlinked)
             {
-                isBlinkPerformed = false;
-                NextUsageTime = Time.time + CoolDown;
-                isKeyPressed = false;
+                Player.transform.position = currentMarker.transform.position;
             }
+
+            Destroy(currentMarker.gameObject);
+            currentMarker = null;
+
+            if (isBlinked)
+            {
+                yield return new WaitForSecondsRealtime(CoolDown);
+            }  
         }
     }
 
     private void Perform()
     {
-        if (marker == null)
+        if (currentMarker == null)
         {
-            InitMarker();
-        }
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 entityPosition = Player.transform.position;
+            currentMarker = Instantiate(markerPrefab);
+            currentMarker.transform.SetParent(blinkCont.transform);
 
-        float fullDistance = Vector2.Distance(entityPosition, mousePosition);
-
-        if (fullDistance > maxRadius)
-        {
-            float distanceRatio = maxRadius / fullDistance;
-            marker.transform.position = new Vector3
-                (
-                Mathf.Lerp(entityPosition.x, mousePosition.x, distanceRatio),
-                Mathf.Lerp(entityPosition.y, mousePosition.y, distanceRatio),
-                Player.transform.position.z
-                );
-        }
-        else
-        {
-            marker.transform.position = new Vector3
-                (
-                mousePosition.x,
-                mousePosition.y,
-                Player.transform.position.z
-                );
-        }
-        if (Input.GetMouseButton(0))
-        {
-            Player.transform.position = marker.transform.position;
-            isBlinkPerformed = true;
-            Destroy(marker);
-            marker = null;
-        }
-        if (Input.GetMouseButton(1))
-        {
-            isKeyPressed = false;
-            Destroy(marker);
-            marker = null;
+            currentMarker.PlayerTransform = Player.transform;
+            currentMarker.MaxRadius = maxRadius;
         }
     }
-
-    private void InitMarker()
-    {
-        marker = new GameObject("Marker");
-        marker.transform.SetParent(blinkCont.transform);
-        SpriteRenderer spriteRenderer = marker.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = markerSprite;
-        spriteRenderer.color = markerColor;
-        marker.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-    }
-
-    
-
     
 }

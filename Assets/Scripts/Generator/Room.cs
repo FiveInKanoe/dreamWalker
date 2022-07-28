@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class RoomComponents : MonoBehaviour
+public class Room : MonoBehaviour
 {
     [SerializeField] private List<GameObject> exits;
     [SerializeField] private List<Tilemap> layers;
