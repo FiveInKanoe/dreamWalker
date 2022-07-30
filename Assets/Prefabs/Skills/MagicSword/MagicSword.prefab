@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8583288180008215648}
   - component: {fileID: 1948694674452936015}
   - component: {fileID: -5414208079638973209}
+  - component: {fileID: 5569887900935211802}
   m_Layer: 0
   m_Name: MagicSword
   m_TagString: Untagged
@@ -132,3 +133,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5569887900935211802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765856595749167943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7584a447b39c3434bae8319612b4a20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 0
+  velocity: 0

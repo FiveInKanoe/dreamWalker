@@ -4,21 +4,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FlyingSword", menuName = "Skills/Flying Sword")]
 public class FlyingSword : Skills
 {
-    [SerializeField] private GameObject swordAmmo;
+    [SerializeField] private Ammo swordAmmo;
     [SerializeField] private float lifeTime;
     [SerializeField] private float damage;
     [SerializeField] private float swordVelocity;
     [SerializeField] private int maxSwordsCount;
 
-    private GameObject flyingSwordCont;
+    private GameObject flyingSwordContainer;
 
 
     public override void Initialize(Player player, GameObject skillContainer)
     {
         SkillContainer = skillContainer;
         Player = player;
-        flyingSwordCont = new GameObject("FlyingSword");
-        flyingSwordCont.transform.SetParent(SkillContainer.transform);
+        flyingSwordContainer = new GameObject("FlyingSword");
+        flyingSwordContainer.transform.SetParent(SkillContainer.transform);
+        swordAmmo.ContainerTransform = flyingSwordContainer.transform;
     }
 
     public override IEnumerator Usage()
@@ -34,19 +35,14 @@ public class FlyingSword : Skills
     private void Perform()
     {
 
-        if (flyingSwordCont.transform.childCount < maxSwordsCount)
+        if (flyingSwordContainer.transform.childCount < maxSwordsCount)
         {
-            GameObject currentSword = Instantiate(swordAmmo, flyingSwordCont.transform);
-
-            currentSword.transform.position = Player.transform.position;
-            currentSword.transform.rotation = Player.transform.rotation;
-
-            currentSword.GetComponent<Rigidbody2D>().velocity = new Vector2
-                (
-                Mathf.Cos(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity,
-                Mathf.Sin(Player.transform.rotation.eulerAngles.z * Mathf.Deg2Rad) * swordVelocity
+            swordAmmo.BeShooted(
+                Player.transform.position,
+                Player.transform.rotation,
+                swordVelocity, 
+                lifeTime
                 );
-            Destroy(currentSword, lifeTime);
         }
     }
 
