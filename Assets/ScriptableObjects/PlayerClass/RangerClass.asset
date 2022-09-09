@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RangerClass
   m_EditorClassIdentifier: 
   attackCoolDown: 0.5
-  ammo: {fileID: 2145828671391751326, guid: 7a64dbf4ccc7f4e47adcc5f27f776774, type: 3}
+  ammo: {fileID: 3492584917598189435, guid: 7a64dbf4ccc7f4e47adcc5f27f776774, type: 3}
   ammoLifeTime: 2
   ammoVelocity: 14

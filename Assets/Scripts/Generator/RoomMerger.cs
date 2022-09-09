@@ -35,64 +35,102 @@ public class RoomMerger : MonoBehaviour
 
     private void CreateLayers()
     {
-        const int BACKGROUND_IDX = 1, FOREGROUND_IDX = 3;
+        const int MAX_LAYER_OREDER = 40;
+        int backgroundID = SortingLayer.NameToID("Background");
 
-        int layersCount = clustGen.StartCell.Room.GetComponent<Room>().Layers.Count;
-        int countOfDecoLayers = (layersCount - 1) / 2;
+        List<Tilemap> layerObjects = clustGen.StartCell.Room.GetComponent<Room>().Layers;
 
-        for (int i = -1; i < layersCount - 1; i++)
+        int index = 0;   
+        foreach (Tilemap layerObject in layerObjects)
         {
-            GameObject layer = new GameObject();
-            Tilemap tmap = layer.AddComponent(typeof(Tilemap)) as Tilemap;
-            TilemapRenderer tmapRenderer = layer.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+            GameObject globalLayerObject = new GameObject();
 
-            if (i == -1)
+            Tilemap globallayersTilemap = globalLayerObject.AddComponent<Tilemap>();
+            TilemapRenderer globalLayersRenderer = globalLayerObject.AddComponent<TilemapRenderer>();
+
+            globalLayersRenderer.sortingLayerID = backgroundID;
+            globalLayerObject.name = layerObject.name;
+
+            switch (globalLayerObject.name)
             {
-                layer.name = "Border";
-                tmapRenderer.sortingLayerID = SortingLayer.layers[BACKGROUND_IDX].id;
-                tmapRenderer.sortingOrder = 40;
-            }
-            else if (i < countOfDecoLayers)
-            {
-                layer.name = "Background-" + i.ToString();
-                tmapRenderer.sortingLayerID = SortingLayer.layers[BACKGROUND_IDX].id;
-                tmapRenderer.sortingOrder = i;
-            }
-            else
-            {
-                int foregroundLayerOrder = i - countOfDecoLayers;
-                layer.name = "Foreground-" + foregroundLayerOrder.ToString();
-                tmapRenderer.sortingLayerID = SortingLayer.layers[FOREGROUND_IDX].id;
-                tmapRenderer.sortingOrder = foregroundLayerOrder;
+                case "Border":
+                    globalLayersRenderer.sortingOrder = MAX_LAYER_OREDER;
+                    break;
+                case "Water":
+                    globalLayersRenderer.sortingOrder = MAX_LAYER_OREDER - 1;
+                    break;
+                default:
+                    globalLayersRenderer.sortingOrder = index++;
+                    break;
             }
 
-            layer.transform.SetParent(transform);
-            layersInf.Add(new LayerInfo(layer, tmap));
+            globalLayerObject.transform.SetParent(transform);
+            layersInf.Add(new LayerInfo(globalLayerObject, globallayersTilemap));
+            
         }
+
+        //const int BACKGROUND_IDX = 1, FOREGROUND_IDX = 3;
+
+        //int layersCount = clustGen.StartCell.Room.GetComponent<Room>().Layers.Count;
+        //int countOfDecoLayers = (layersCount - 1) / 2;
+
+        //for (int i = -1; i < layersCount - 1; i++)
+        //{
+        //    GameObject layer = new GameObject();
+        //    Tilemap tmap = layer.AddComponent(typeof(Tilemap)) as Tilemap;
+        //    TilemapRenderer tmapRenderer = layer.AddComponent(typeof(TilemapRenderer)) as TilemapRenderer;
+
+        //    if (i == -1)
+        //    {
+        //        layer.name = "Border";
+        //        tmapRenderer.sortingLayerID = SortingLayer.layers[BACKGROUND_IDX].id;
+        //        tmapRenderer.sortingOrder = 40;
+        //    }
+        //    else if (i < countOfDecoLayers)
+        //    {
+        //        layer.name = "Background-" + i.ToString();
+        //        tmapRenderer.sortingLayerID = SortingLayer.layers[BACKGROUND_IDX].id;
+        //        tmapRenderer.sortingOrder = i;
+        //    }
+        //    else
+        //    {
+        //        int foregroundLayerOrder = i - countOfDecoLayers;
+        //        layer.name = "Foreground-" + foregroundLayerOrder.ToString();
+        //        tmapRenderer.sortingLayerID = SortingLayer.layers[FOREGROUND_IDX].id;
+        //        tmapRenderer.sortingOrder = foregroundLayerOrder;
+        //    }
+
+        //    layer.transform.SetParent(transform);
+        //    layersInf.Add(new LayerInfo(layer, tmap));
+        //}
     }
 
     private void MakeMap()
     {
+        //going through masked map matrix
         for (int i = 0; i < cellMatrix.GetLength(0); i++)
         {
             for (int j = 0; j < cellMatrix.GetLength(1); j++)
             {
-
+                //pick a cell from this matrix
                 RoomCell cell = cellMatrix[i, j];
                 if (cell != null)
                 {
-
+                    //get all info about a room from the cell
                     Room roomInfo = cell.Room.GetComponent<Room>();
 
                     Tilemap currentLayer = roomInfo.Layers[0];
 
                     currentLayer.CompressBounds();
-
+                    //get size of the room
                     roomWidth = currentLayer.cellBounds.xMax;
                     roomHeight = currentLayer.cellBounds.yMax;
 
+                    //calculate global offset for whole map
                     int xRoomOffset = roomWidth * j;
                     int yRoomOffset = roomHeight * i;
+
+                    //get all the room layers and write them to a list
                     List<TileBase[]> roomLayers = new List<TileBase[]>();
                     foreach (Tilemap tmap in roomInfo.Layers)
                     {
@@ -105,10 +143,12 @@ public class RoomMerger : MonoBehaviour
                     }
 
                     int tileCounter = 0;
+                    //go through each tile of the room
                     for (int y = 0; y < roomHeight; y++)
                     {
                         for (int x = 0; x < roomWidth; x++)
                         {
+                            //go through each layer of the room
                             for (int k = 0; k < layersInf.Count; k++)
                             {
                                 layersInf[k].Tilemap.SetTile
@@ -121,6 +161,19 @@ public class RoomMerger : MonoBehaviour
                         }
                     }
 
+                    foreach (GameObject gameObject in roomInfo.Objects)
+                    {
+                        GameObject newObjectToPlace = Instantiate(gameObject);
+                        Vector2 objectPosition = new Vector2()
+                        {
+                            x = gameObject.transform.position.x + xRoomOffset,
+                            y = gameObject.transform.position.y + yRoomOffset
+                        };
+                        newObjectToPlace.transform.localPosition = objectPosition;
+                        newObjectToPlace.transform.SetParent(transform);
+                    }
+
+                    //???
                     if (cell == clustGen.StartCell || cell == clustGen.ExitCell)
                     {
                         placesForStructures[0].Add(new BoundsInt
